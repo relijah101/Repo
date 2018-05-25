@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="viewerPane" stylesheets="@../Styles/Default.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="morogoro_lims.controller.admin.LibrarianViewer">
+   <padding>
+      <Insets bottom="15.0" left="5.0" right="5.0" top="2.0" />
+   </padding>
+   <children>
+      <VBox alignment="CENTER" prefHeight="579.0" prefWidth="269.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="167.0" fitWidth="219.0" pickOnBounds="true" preserveRatio="true" />
+            <TextField fx:id="regFld" prefHeight="26.0" prefWidth="608.0" promptText="Namba ya uandikishaji" styleClass="textfield" />
+            <TextField fx:id="fNameFld" disable="true" layoutX="10.0" layoutY="10.0" promptText="Jina la kwanza" styleClass="textfield" />
+            <TextField fx:id="mNameFld" disable="true" layoutX="10.0" layoutY="35.0" promptText="Jina la kati" styleClass="textfield" />
+            <TextField fx:id="lNameFld" disable="true" layoutX="10.0" layoutY="60.0" promptText="Jina la ukoo" styleClass="textfield" />
+            <TextField fx:id="phone1Fld" disable="true" layoutX="10.0" layoutY="85.0" promptText="Simu 1" styleClass="textfield" />
+            <TextField fx:id="phone2Fld" disable="true" layoutX="10.0" layoutY="110.0" promptText="Simu 2" styleClass="textfield" />
+            <TextField fx:id="addressFld" disable="true" layoutX="10.0" layoutY="110.0" promptText="Sanduku la posta" styleClass="textfield" />
+            <TextField fx:id="streetFld" disable="true" layoutX="10.0" layoutY="135.0" promptText="Mtaa" styleClass="textfield" />
+            <TextField fx:id="departmentFld" disable="true" layoutX="10.0" layoutY="529.0" promptText="Kitengo" styleClass="textfield" />
+            <HBox alignment="CENTER" prefHeight="42.0" prefWidth="269.0" spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Badilisha" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Futa">
+                     <styleClass>
+                        <String fx:value="delete-btn" />
+                        <String fx:value="button" />
+                     </styleClass></Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

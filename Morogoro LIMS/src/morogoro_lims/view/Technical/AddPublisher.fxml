@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane stylesheets="@../Styles/Default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="morogoro_lims.controller.technical.AddPublisher">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="97.0" prefWidth="215.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FOMU YA KUREKODI MCHAPISHAJI">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+            <HBox alignment="TOP_RIGHT" spacing="15.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onCancel" styleClass="clear-btn" text="Hairisha" />
+                  <Button id="button" mnemonicParsing="false" onAction="#onSavePublisher" text="Hifadhi" />
+               </children>
+            </HBox>
+            <TextField fx:id="nameFld" promptText="Jina la mchapishaji" styleClass="textfield" />
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</AnchorPane>

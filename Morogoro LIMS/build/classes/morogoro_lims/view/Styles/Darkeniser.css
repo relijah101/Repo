@@ -1,0 +1,22 @@
+.link-label:hover{
+    -fx-background-color: #ff9999;
+}
+.link-label:pressed{
+    -fx-background-color: #ff9966;
+}
+#button{
+    -fx-background-color: #ff0033;
+    -fx-pref-height: 35;
+}
+.delete-btn{
+    -fx-background-color: #ff0000;
+}
+.upload-btn{
+    -fx-background-color: #339933;
+}
+.textfield{
+    -fx-border-width: 0 0 2 0;
+    -fx-background-color: transparent;
+    -fx-border-color: #cccccc;
+}
+

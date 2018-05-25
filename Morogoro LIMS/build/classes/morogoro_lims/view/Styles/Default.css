@@ -1,0 +1,29 @@
+.link-label:hover{
+    -fx-background-color: #33cccc;
+}
+.link-label:pressed{
+    -fx-background-color: #339999;
+}
+.button{
+    -fx-background-color: #00aaaa;
+    -fx-pref-height: 35;
+    -fx-pref-width: 95;
+}
+.delete-btn{
+    -fx-background-color: #ff0000;
+}
+.upload-btn{
+    -fx-background-color: #339933;
+}
+.clear-btn{
+    -fx-background-color: #ccdcdd;
+}
+.textfield{
+    -fx-border-width: 0 0 2 0;
+    -fx-background-color: transparent;
+    -fx-border-color: #cccccc;
+}
+.loginText{
+    -fx-text-fill: red;
+}
+

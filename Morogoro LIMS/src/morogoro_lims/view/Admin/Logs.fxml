@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane stylesheets="@../Styles/Default.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="morogoro_lims.controller.admin.LogsTable">
+   <children>
+      <TableView fx:id="logsTable" layoutY="1.0" prefHeight="401.0" prefWidth="627.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="regNumberCol" prefWidth="75.0" text="Namba ya mkutubi" />
+          <TableColumn fx:id="fullNameCol" prefWidth="105.0" text="Jina la Mkutubi" />
+            <TableColumn fx:id="dateCol" prefWidth="91.0" text="Tarehe/Muda" />
+            <TableColumn fx:id="actionCol" prefWidth="264.0" text="Kitendo" />
+            <TableColumn fx:id="infoCol" editable="false" minWidth="0.0" prefWidth="120.0" text="Taarifa" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+</AnchorPane>

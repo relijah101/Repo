@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane stylesheets="@../Styles/Default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="morogoro_lims.controller.technical.AddBook">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="449.0" prefWidth="250.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FOMU YA KUREKODI KITABU">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+            <HBox alignment="TOP_RIGHT" spacing="15.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Futa">
+                     <styleClass>
+                        <String fx:value="clear-btn" />
+                        <String fx:value="button" />
+                     </styleClass></Button>
+                  <Button id="button" mnemonicParsing="false" text="Hifadhi" />
+               </children>
+            </HBox>
+            <TextField promptText="Namba ya kitabu" styleClass="textfield" />
+            <TextField promptText="Jina la kitabu" styleClass="textfield" />
+            <TextField layoutX="10.0" layoutY="100.0" promptText="Chapisho" styleClass="textfield" />
+            <ComboBox promptText="Kategori" styleClass="textfield" />
+            <ComboBox layoutX="10.0" layoutY="180.0" promptText="Mchapishaji" styleClass="textfield" />
+            <TextField promptText="Idadi ya nakala" styleClass="textfield" />
+            <TextField promptText="ISBN" styleClass="textfield" />
+            <HBox spacing="10.0">
+               <children>
+                  <Label text="Kumbukumbu">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <CheckBox mnemonicParsing="false" text="Ndiyo" />
+                  <CheckBox mnemonicParsing="false" text="Hapana" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</AnchorPane>
