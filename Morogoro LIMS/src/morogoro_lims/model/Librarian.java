@@ -7,7 +7,7 @@ import javafx.beans.property.StringProperty;
 
 public class Librarian{
     Department dep;
-    private final LongProperty id;
+    private LongProperty id;
     private final StringProperty reg;
     private final StringProperty firstName;
     private final StringProperty middleName;
@@ -19,11 +19,11 @@ public class Librarian{
     private final StringProperty password;
     private final StringProperty street;
     private final StringProperty region;
-    private final StringProperty status;
+    private final byte status;
     private final byte[] photo;
     
 
-    public Librarian(Long id, String reg, String fName, String mName, String lName, Department dep, String postal, String phone1, String phone2, String password, String street, String region, String status, byte[] photo) {
+    public Librarian(Long id, String reg, String fName, String mName, String lName, Department dep, String postal, String phone1, String phone2, String password, String street, String region, byte status, byte[] photo) {
         this.id = new SimpleLongProperty(id);
         this.reg = new SimpleStringProperty(reg);
         this.firstName = new SimpleStringProperty(fName);
@@ -36,7 +36,23 @@ public class Librarian{
         this.password = new SimpleStringProperty(password);
         this.street = new SimpleStringProperty(street);
         this.region = new SimpleStringProperty(region);
-        this.status = new SimpleStringProperty(status);
+        this.status = status;
+        this.photo = photo;
+        this.dep = dep;
+    }
+    public Librarian(String reg, String fName, String mName, String lName, Department dep, String postal, String phone1, String phone2, String password, String street, String region, byte status, byte[] photo) {
+        this.reg = new SimpleStringProperty(reg);
+        this.firstName = new SimpleStringProperty(fName);
+        this.middleName = new SimpleStringProperty(mName);
+        this.lastName = new SimpleStringProperty(lName);
+        this.department = new SimpleStringProperty(dep.getName());
+        this.postalAddr = new SimpleStringProperty(postal);
+        this.phone1 = new SimpleStringProperty(phone1);
+        this.phone2 = new SimpleStringProperty(phone2);
+        this.password = new SimpleStringProperty(password);
+        this.street = new SimpleStringProperty(street);
+        this.region = new SimpleStringProperty(region);
+        this.status = status;
         this.photo = photo;
         this.dep = dep;
     }
@@ -54,7 +70,7 @@ public class Librarian{
     public String getPassword() {return password.get();}
     public String getStreet() {return street.get();}
     public String getRegion() {return region.get();}
-    public String getStatus() {return status.get();}
+    public byte getStatus() {return status;}
     public byte[] getPhoto() {return photo;}
     //Property Getters
     public LongProperty getIdProperty() {return id;}
@@ -67,6 +83,5 @@ public class Librarian{
     public StringProperty getPhone2Property() {return phone2;}
     public StringProperty getPasswordProperty() {return password;}
     public StringProperty getStreetProperty() {return street;}
-    public StringProperty getRegionProperty() {return region;}
-    public StringProperty getStatusProperty() {return status;}    
+    public StringProperty getRegionProperty() {return region;}  
 }

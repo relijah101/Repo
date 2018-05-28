@@ -14,7 +14,7 @@ import javafx.collections.ObservableList;
 public class Book {
     Category cat;
     Publisher pub;
-    private final LongProperty id;
+    private LongProperty id;
     private final StringProperty classNumber;
     private final StringProperty title;
     private final StringProperty category;
@@ -29,6 +29,18 @@ public class Book {
         this.cat = category;
         this.pub = publisher;
         this.id = new SimpleLongProperty(id);
+        this.classNumber = new SimpleStringProperty(classNumber);
+        this.title = new SimpleStringProperty(title);
+        this.category = new SimpleStringProperty(category.getCategory());
+        this.edition = new SimpleIntegerProperty(edition);
+        this.copies = new SimpleIntegerProperty(copies);
+        this.publisher = new SimpleStringProperty(publisher.getPublisher());
+        this.isbn = new SimpleStringProperty(isbn);
+        this.reference = new SimpleBooleanProperty(reference);
+    }
+    public Book(String classNumber, String title, Category category, int edition, int copies, Publisher publisher, String isbn, boolean reference) {
+        this.cat = category;
+        this.pub = publisher;
         this.classNumber = new SimpleStringProperty(classNumber);
         this.title = new SimpleStringProperty(title);
         this.category = new SimpleStringProperty(category.getCategory());

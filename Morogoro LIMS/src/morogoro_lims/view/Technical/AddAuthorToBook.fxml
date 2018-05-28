@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -31,16 +32,22 @@
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin>
+                     <image>
+                        <Image url="@../Image/search-icon.png" />
+                     </image>
                   </ImageView>
-                  <TextField fx:id="searchBook" editable="false" focusTraversable="false" layoutX="420.0" layoutY="10.0" onKeyReleased="#onSearchBook" prefHeight="27.0" prefWidth="239.0" promptText="Tafuta kitabu" styleClass="textfield" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="searchBook" editable="false" focusTraversable="false" layoutX="420.0" layoutY="10.0" onKeyReleased="#onSearchBook" prefHeight="27.0" prefWidth="175.0" promptText="Tafuta kitabu" styleClass="textfield" HBox.hgrow="ALWAYS" />
                   <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="11.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin>
+                     <image>
+                        <Image url="@../Image/search-icon.png" />
+                     </image>
                   </ImageView>
-                  <TextField fx:id="searchAuthor" editable="false" focusTraversable="false" onKeyReleased="#onSearchAuthor" promptText="Tafuta mwandishi" styleClass="textfield" HBox.hgrow="ALWAYS">
+                  <TextField fx:id="searchAuthor" editable="false" focusTraversable="false" onKeyReleased="#onSearchAuthor" prefHeight="27.0" prefWidth="195.0" promptText="Tafuta mwandishi" styleClass="textfield" HBox.hgrow="ALWAYS">
                      <HBox.margin>
-                        <Insets right="25.0" />
+                        <Insets right="80.0" />
                      </HBox.margin>
                   </TextField>
                   <Button mnemonicParsing="false" onAction="#onCancel" styleClass="clear-btn" text="Hairisha" />

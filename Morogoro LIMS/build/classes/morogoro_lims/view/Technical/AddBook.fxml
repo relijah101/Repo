@@ -24,21 +24,21 @@
             </Text>
             <HBox alignment="TOP_RIGHT" spacing="15.0">
                <children>
-                  <Button mnemonicParsing="false" text="Futa">
+                  <Button mnemonicParsing="false" onAction="#onCancel" text="Futa">
                      <styleClass>
                         <String fx:value="clear-btn" />
                         <String fx:value="button" />
                      </styleClass></Button>
-                  <Button id="button" mnemonicParsing="false" text="Hifadhi" />
+                  <Button id="button" mnemonicParsing="false" onAction="#onSave" text="Hifadhi" />
                </children>
             </HBox>
-            <TextField promptText="Namba ya kitabu" styleClass="textfield" />
-            <TextField promptText="Jina la kitabu" styleClass="textfield" />
-            <TextField layoutX="10.0" layoutY="100.0" promptText="Chapisho" styleClass="textfield" />
-            <ComboBox promptText="Kategori" styleClass="textfield" />
-            <ComboBox layoutX="10.0" layoutY="180.0" promptText="Mchapishaji" styleClass="textfield" />
-            <TextField promptText="Idadi ya nakala" styleClass="textfield" />
-            <TextField promptText="ISBN" styleClass="textfield" />
+            <TextField fx:id="classNumberFld" promptText="Namba ya kitabu" styleClass="textfield" />
+            <TextField fx:id="titleFld" promptText="Jina la kitabu" styleClass="textfield" />
+            <TextField fx:id="editionFld" layoutX="10.0" layoutY="100.0" promptText="Chapisho" styleClass="textfield" />
+            <ComboBox fx:id="categoryFld" promptText="Kategori" styleClass="textfield" />
+            <ComboBox fx:id="publisherFld" layoutX="10.0" layoutY="180.0" promptText="Mchapishaji" styleClass="textfield" />
+            <TextField fx:id="copiesFld" promptText="Idadi ya nakala" styleClass="textfield" />
+            <TextField fx:id="isbnFld" promptText="ISBN" styleClass="textfield" />
             <HBox spacing="10.0">
                <children>
                   <Label text="Kumbukumbu">
@@ -46,8 +46,8 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Label>
-                  <CheckBox mnemonicParsing="false" text="Ndiyo" />
-                  <CheckBox mnemonicParsing="false" text="Hapana" />
+                  <CheckBox fx:id="yes" mnemonicParsing="false" onAction="#onYesReference" text="Ndiyo" />
+                  <CheckBox fx:id="no" mnemonicParsing="false" onAction="#onNoReference" selected="true" text="Hapana" />
                </children>
             </HBox>
          </children>

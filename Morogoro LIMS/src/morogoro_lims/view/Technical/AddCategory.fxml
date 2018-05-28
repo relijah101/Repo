@@ -21,13 +21,13 @@
             </Text>
             <HBox alignment="TOP_RIGHT" spacing="15.0">
                <children>
-                  <Button mnemonicParsing="false" styleClass="clear-btn" text="Hairisha" />
-                  <Button id="button" mnemonicParsing="false" text="Hifadhi" />
+                  <Button mnemonicParsing="false" onAction="#onCancel" styleClass="clear-btn" text="Hairisha" />
+                  <Button id="button" mnemonicParsing="false" onAction="#onSave" text="Hifadhi" />
                </children>
             </HBox>
-            <TextField promptText="Namba ya kategori" styleClass="textfield" />
-            <TextField promptText="Jina la kategori" styleClass="textfield" />
-            <TextArea prefHeight="200.0" prefWidth="200.0" promptText="Maelezo kuhusu kategori" styleClass="textfield" />
+            <TextField fx:id="numberFld" promptText="Namba ya kategori" styleClass="textfield" />
+            <TextField fx:id="categoryFld" promptText="Jina la kategori" styleClass="textfield" />
+            <TextArea fx:id="descriptionFld" prefHeight="200.0" prefWidth="200.0" promptText="Maelezo kuhusu kategori" styleClass="textfield" />
          </children>
       </VBox>
    </children>

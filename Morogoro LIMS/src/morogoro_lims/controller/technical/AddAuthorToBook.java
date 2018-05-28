@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
@@ -32,6 +34,8 @@ public class AddAuthorToBook implements Initializable{
     
     private Long bookId, authorId;
     ObservableList<String> authors = FXCollections.observableArrayList();
+    ObservableList<Author> authorsList;
+    ObservableList<Book> bookList;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initBookTable();
@@ -44,19 +48,23 @@ public class AddAuthorToBook implements Initializable{
     }
     public void initBookTable(){
         bookTable.getItems().clear();
-        ObservableList<Book> bookList = bookQuery.select(Query.BOOK_TABLE, 1);
+        bookList = bookQuery.select(Query.BOOK_TABLE, 1);
         if(!bookList.isEmpty())
             bookTable.setItems(bookList);
-        else
+        else{
             bookTable.setPlaceholder(new Text("Hakuna kitabu kilichorekodiwa."));
+            bookTable.setDisable(true);
+        }
     }
     public void initAuthorTable(){
         authorTable.getItems().clear();
-        ObservableList<Author> authorList = authorQuery.select(Query.AUTHOR_TABLE, 1);
-        if(!authorList.isEmpty())
-            authorTable.setItems(authorList);
-        else
+        authorsList = authorQuery.select(Query.AUTHOR_TABLE, 1);
+        if(!authorsList.isEmpty())
+            authorTable.setItems(authorsList);
+        else{
             authorTable.setPlaceholder(new Text("Hakuna mwandishi aliyerekodiwa."));
+            searchAuthor.setDisable(true);
+        }
     }
     public void initBookCols(){
         bookNumberCol.setCellValueFactory(new PropertyValueFactory<>("classNumber"));
@@ -68,20 +76,66 @@ public class AddAuthorToBook implements Initializable{
     }    
     @FXML
     public void onSearchBook(){
-        
+        FilteredList<Book> filteredList = new FilteredList<>(bookList, e->true);
+        searchBook.textProperty().addListener((observable, oldValue, newValue)->{
+            filteredList.setPredicate(book->{
+                //If search book is empty. Display all books
+                if(newValue == null || newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if(book.getClassNumber().equals(lowerCaseFilter)){
+                    return true;
+                }else if(book.getTitle().equals(lowerCaseFilter)){
+                    return true;
+                }else if(book.getCategory().equals(lowerCaseFilter)){
+                    return true;
+                }else if(book.getPublisher().equals(lowerCaseFilter)){
+                    return true;
+                }
+                return false;
+            });
+        });    
+        SortedList sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(bookTable.comparatorProperty());
+        bookTable.setItems(sortedList);
     }
     @FXML
     public void onSearchAuthor(){
-        
+        FilteredList<Author> filteredList = new FilteredList<>(authorsList, e->true);
+        searchAuthor.textProperty().addListener((observable, oldValue, newValue)->{
+            filteredList.setPredicate(author->{
+                //If search author is empty. Display all authors
+                if(newValue == null || newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if(author.getFirstName().equals(lowerCaseFilter)){
+                    return true;
+                }else if(author.getMiddleName().equals(lowerCaseFilter)){
+                    return true;
+                }else if(author.getLastName().equals(lowerCaseFilter)){
+                    return true;
+                }
+                return false;
+            });
+        });    
+        SortedList sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(authorTable.comparatorProperty());
+        authorTable.setItems(sortedList);
     }
     @FXML
     public void onAddAuthorToBook(){
-        authors.add(authorTable.getSelectionModel().getSelectedItem().getFullName());
+        authors.add(authorTable.getSelectionModel().getSelectedItem().getId()+"/ "+authorTable.getSelectionModel().getSelectedItem().getFullName());
         authorTable.getSelectionModel().clearSelection();
     }
     @FXML
     public void onRemoveAuthor(){
-        authors.remove(authorList.getSelectionModel().getSelectedIndex());
+        int index = authorList.getSelectionModel().getSelectedIndex();
+        if(index == -1){
+            return;
+        }
+        authors.remove(index);
     }
     @FXML
     public void authorTableClicked(){

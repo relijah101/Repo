@@ -4,6 +4,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -17,8 +18,11 @@
                <children>
                   <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
-                        <Insets top="5.0" />
+                        <Insets top="6.0" />
                      </HBox.margin>
+                     <image>
+                        <Image url="@../Image/search-icon.png" />
+                     </image>
                   </ImageView>
                   <TextField fx:id="searchAuthor" onKeyReleased="#onSearchAuthor" promptText="Tafuta mwandishi" styleClass="textfield" HBox.hgrow="ALWAYS" />
                </children>

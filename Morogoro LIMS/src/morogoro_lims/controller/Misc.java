@@ -11,6 +11,7 @@ public class Misc {
         switch(x){
             case 0:
                 Alert infoAlert = new Alert(AlertType.INFORMATION);
+                infoAlert.setTitle("Umefanikisha.");
                 infoAlert.setHeaderText("Ujumbe");
                 infoAlert.setContentText(text);
                 infoAlert.getButtonTypes().clear();
@@ -19,6 +20,7 @@ public class Misc {
                 break;
             case 1:
                 Alert warningAlert = new Alert(AlertType.WARNING, text, ButtonType.OK);
+                warningAlert.setTitle("Onyo.");
                 warningAlert.setHeaderText("Ujumbe");
                 warningAlert.setContentText(text);
                 warningAlert.getButtonTypes().clear();
@@ -27,6 +29,7 @@ public class Misc {
                 break;
             case 2:
                 Alert errorAlert = new Alert(AlertType.ERROR, text, ButtonType.OK);
+                errorAlert.setTitle("Tatizo.");
                 errorAlert.setHeaderText("Ujumbe");
                 errorAlert.showAndWait();
                 break;

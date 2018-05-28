@@ -18,19 +18,17 @@ public class LibrarianViewer implements Initializable{
         
     }
     public void setData(Librarian librarian){
-        this.librarian = librarian;
-        
-        regFld.setText(librarian.getReg());
-        departmentFld.setText(this.librarian.getDepartment());
-        fNameFld.setText(this.librarian.getFirstName());
-        mNameFld.setText(this.librarian.getMiddleName());
-        lNameFld.setText(this.librarian.getLastName());
-        phone1Fld.setText(this.librarian.getPhone1());
-        phone2Fld.setText(this.librarian.getPhone2());
-        addressFld.setText(this.librarian.getPostalAddr());
-        //streetFld.setText(this.librarian.getStreet());
-        streetFld.setText("hello");
-        System.out.println(this.librarian.getFirstName());
+//        this.librarian = librarian;      
+//        System.out.println(this.librarian.getFirstName());
+//        regFld.setText(this.librarian.getReg());
+//        departmentFld.setText(this.librarian.getDepartment());
+//        fNameFld.setText(this.librarian.getFirstName());
+//        mNameFld.setText(this.librarian.getMiddleName());
+//        lNameFld.setText(this.librarian.getLastName());
+//        phone1Fld.setText(this.librarian.getPhone1());
+//        phone2Fld.setText(this.librarian.getPhone2());
+//        addressFld.setText(this.librarian.getPostalAddr());
+//        streetFld.setText(this.librarian.getStreet());
     }
     
     @FXML

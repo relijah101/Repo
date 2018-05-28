@@ -26,5 +26,9 @@ public class Publisher{
     //Property Getters
     public LongProperty getIdProperty() {return id;}
     public StringProperty getPublisherProperty() {return publisher;}
-
+    //toString
+    @Override
+    public String toString() {
+        return id.get() + "/ " + publisher.get();
+    }    
 }

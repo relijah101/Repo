@@ -20,13 +20,13 @@
             </Text>
             <HBox alignment="TOP_RIGHT" spacing="15.0">
                <children>
-                  <Button mnemonicParsing="false" styleClass="clear-btn" text="Futa" />
-                  <Button id="button" mnemonicParsing="false" text="Hifadhi" />
+                  <Button mnemonicParsing="false" onAction="#onCancel" styleClass="clear-btn" text="Futa" />
+                  <Button id="button" mnemonicParsing="false" onAction="#onSave" text="Hifadhi" />
                </children>
             </HBox>
-            <TextField promptText="Jina la kwanza" styleClass="textfield" />
-            <TextField layoutX="10.0" layoutY="108.0" promptText="Jina la kati" styleClass="textfield" />
-            <TextField layoutX="10.0" layoutY="155.0" promptText="Jina la ukoo" styleClass="textfield" />
+            <TextField fx:id="firstNameFld" promptText="Jina la kwanza" styleClass="textfield" />
+            <TextField fx:id="middleNameFld" layoutX="10.0" layoutY="108.0" promptText="Jina la kati" styleClass="textfield" />
+            <TextField fx:id="lastNameFld" layoutX="10.0" layoutY="155.0" promptText="Jina la ukoo" styleClass="textfield" />
          </children>
       </VBox>
    </children>

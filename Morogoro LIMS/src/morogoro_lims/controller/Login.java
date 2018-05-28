@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,18 +15,25 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import morogoro_lims.controller.admin.Dashboard;
+import morogoro_lims.model.Info;
 import morogoro_lims.model.User;
 import morogoro_lims.model.connect.Query;
 
 public class Login implements Initializable{
-    private final Query query = new Query();
+    private final Query<Info> query = new Query();
     @FXML private TextField usernameFld;
     @FXML private PasswordField passwordFld;
-    @FXML private Text loginStatusText;
+    @FXML private Text loginStatusText, titleText, addressText, cityText, phoneText, emailText;
+    
     private int count = 0;
+    private ObservableList<Info> infoData = query.select(Query.INFO_TABLE, 1);
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+        titleText.setText(infoData.get(0).getName().toUpperCase());
+        addressText.setText(infoData.get(0).getAddress().toUpperCase());
+        cityText.setText(infoData.get(0).getCity().toUpperCase());
+        phoneText.setText(infoData.get(0).getPhone1()+"; "+infoData.get(0).getPhone2());
+        emailText.setText(infoData.get(0).getEmail());
     }
     
     @FXML

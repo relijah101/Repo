@@ -10,7 +10,7 @@ import javafx.beans.property.StringProperty;
  * A model class for author object
  */
 public class Author {
-    private final LongProperty id;
+    private LongProperty id;
     private final StringProperty firstName;
     private final StringProperty middleName;
     private final StringProperty lastName;
@@ -18,6 +18,20 @@ public class Author {
     
     public Author(Long id, String firstName, String middleName, String lastName) {
         this.id = new SimpleLongProperty(id);
+        this.firstName = new SimpleStringProperty(firstName);
+        this.middleName = new SimpleStringProperty(middleName);
+        this.lastName = new SimpleStringProperty(lastName);
+        if(middleName.isEmpty() && lastName.isEmpty()){
+            fullName = firstName;
+        }else if(lastName.isEmpty()){
+            fullName = firstName + " " + middleName;
+        }else if(middleName.isEmpty()){
+            fullName = firstName + " " + lastName;
+        }else{
+            fullName = firstName + " " + middleName+ " " + lastName;
+        }
+    }
+    public Author(String firstName, String middleName, String lastName) {
         this.firstName = new SimpleStringProperty(firstName);
         this.middleName = new SimpleStringProperty(middleName);
         this.lastName = new SimpleStringProperty(lastName);
