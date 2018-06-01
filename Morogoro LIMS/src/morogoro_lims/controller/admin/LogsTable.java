@@ -7,7 +7,8 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -16,7 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import morogoro_lims.model.Logs;
-import morogoro_lims.model.connect.Query;
+import morogoro_lims.model.query.Query;
 
 public class LogsTable implements Initializable{
     private final Query<Logs> query = new Query();
@@ -60,16 +61,15 @@ public class LogsTable implements Initializable{
         Text date = new Text("Tarehe : "+logsData.getDate());
         Text action = new Text("Kitendo : "+logsData.getAction());
         Text info = new Text("Taarifa : "+logsData.getInfo());
-        Button okButton = new Button("OK");
         
         VBox logBox = new VBox(5);
-        logBox.getChildren().addAll(logId, regNumber, name, date, action, info, okButton);
+        logBox.getChildren().addAll(logId, regNumber, name, date, action, info);
         
         Dialog logDialog = new Dialog();
         logDialog.setTitle("Rekodi.");         
         logDialog.setGraphic(logBox);
         logDialog.show();
-        okButton.setOnAction(e->{logDialog.close();});
+        logDialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
     }
     @FXML
     public void onDeleteLogInfo(){

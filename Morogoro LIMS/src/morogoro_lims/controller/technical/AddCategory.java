@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import morogoro_lims.controller.Misc;
 import morogoro_lims.controller.PatternMatch;
 import morogoro_lims.model.Category;
-import morogoro_lims.model.connect.Query;
+import morogoro_lims.model.query.Query;
 
 public class AddCategory implements Initializable{
     private final Query<Category> query = new Query();

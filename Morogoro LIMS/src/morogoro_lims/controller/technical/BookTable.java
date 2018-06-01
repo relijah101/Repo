@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import morogoro_lims.model.Book;
-import morogoro_lims.model.connect.Query;
+import morogoro_lims.model.query.Query;
 
 public class BookTable implements Initializable{
     private final Query<Book> query = new Query();

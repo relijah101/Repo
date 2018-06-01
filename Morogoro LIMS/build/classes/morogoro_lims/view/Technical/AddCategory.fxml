@@ -12,9 +12,9 @@
 
 <AnchorPane stylesheets="@../Styles/Default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="morogoro_lims.controller.technical.AddCategory">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="407.0" prefWidth="265.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" prefHeight="422.0" prefWidth="275.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FOMU YA KUREKODI KATEGORI">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-title" text="FOMU YA KUREKODI KATEGORI">
                <font>
                   <Font size="17.0" />
                </font>

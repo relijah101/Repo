@@ -4,8 +4,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -16,7 +16,7 @@
    <children>
       <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="530.0" prefWidth="705.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FOMU YA KUANDIKISHA TAARIFA ZA MKUTUBI" textAlignment="CENTER">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-title" text="FOMU YA KUANDIKISHA TAARIFA ZA MKUTUBI" textAlignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>

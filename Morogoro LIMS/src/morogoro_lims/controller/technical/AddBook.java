@@ -13,7 +13,7 @@ import morogoro_lims.controller.PatternMatch;
 import morogoro_lims.model.Book;
 import morogoro_lims.model.Category;
 import morogoro_lims.model.Publisher;
-import morogoro_lims.model.connect.Query;
+import morogoro_lims.model.query.Query;
 
 public class AddBook implements Initializable{
     private final Query<Book> query = new Query();

@@ -19,12 +19,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane stylesheets="@../Styles/Default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="morogoro_lims.controller.registration.RegisterSecondary">
    <children>
-      <VBox alignment="CENTER" prefHeight="494.0" prefWidth="708.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" prefHeight="502.0" prefWidth="728.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FOMU YA KUANDIKISHA MWANACHAMA : MWANAFUNZI WA SEKONDARI">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-title" text="FOMU YA KUANDIKISHA MWANACHAMA : MWANAFUNZI WA SEKONDARI">
                <font>
                   <Font size="17.0" />
                </font>
@@ -43,7 +42,7 @@
                   <TextField fx:id="searchSecondary" onKeyReleased="#onSearchAdult" promptText="Tafuta mwanachama" styleClass="textfield" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <TableView fx:id="registerSecondaryTable" onMouseClicked="#onAdultTableClicked" prefHeight="151.0" prefWidth="688.0">
+            <TableView fx:id="registerSecondaryTable" onMouseClicked="#onAdultTableClicked" prefHeight="151.0" prefWidth="688.0" VBox.vgrow="ALWAYS">
               <columns>
                 <TableColumn fx:id="idCol" prefWidth="75.0" text="Namba" />
                 <TableColumn fx:id="firstNameCol" prefWidth="75.0" text="Jina la kwanza" />
@@ -54,6 +53,9 @@
                   <TableColumn fx:id="idTypeCol" prefWidth="75.0" text="Aina ya ID" />
                   <TableColumn fx:id="idNumberCol" prefWidth="75.0" text="Namba ya ID" />
               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
             <GridPane>
               <columnConstraints>
@@ -68,9 +70,9 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Namba ya usajili :" GridPane.rowIndex="1" />
-                  <Label layoutX="10.0" layoutY="17.0" text="Tarehe ya kuanza :" GridPane.rowIndex="3" />
-                  <Label layoutX="10.0" layoutY="47.0" text="Tarehe ya mwisho :" GridPane.rowIndex="4" />
+                  <Label styleClass="label-text" text="Namba ya usajili :" GridPane.rowIndex="1" />
+                  <Label layoutX="10.0" layoutY="17.0" styleClass="label-text" text="Tarehe ya kuanza :" GridPane.rowIndex="3" />
+                  <Label layoutX="10.0" layoutY="47.0" styleClass="label-text" text="Tarehe ya mwisho :" GridPane.rowIndex="4" />
                   <TextField fx:id="regNumberFld" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="startDateFld" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Usajili" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS">
@@ -81,7 +83,7 @@
                         <Insets top="4.0" />
                      </GridPane.margin>
                   </Text>
-                  <Label layoutX="10.0" layoutY="37.0" text="Namba ya stakabadhi :" GridPane.rowIndex="2" />
+                  <Label layoutX="10.0" layoutY="37.0" styleClass="label-text" text="Namba ya stakabadhi :" GridPane.rowIndex="2" />
                   <TextField fx:id="receiptFld" layoutX="186.0" layoutY="32.0" prefHeight="27.0" prefWidth="550.0" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <ComboBox fx:id="endDateFld" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
@@ -101,8 +103,8 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label layoutX="10.0" layoutY="17.0" text="Jina la shule :" GridPane.rowIndex="1" />
-                  <Label layoutX="10.0" layoutY="47.0" text="Anuani :" GridPane.rowIndex="2" />
+                  <Label layoutX="10.0" layoutY="17.0" styleClass="label-text" text="Jina la shule :" GridPane.rowIndex="1" />
+                  <Label layoutX="10.0" layoutY="47.0" styleClass="label-text" text="Anuani :" GridPane.rowIndex="2" />
                   <TextField fx:id="schoolFld" editable="false" prefHeight="27.0" prefWidth="441.0" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="schoolAddrFld" editable="false" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Udhamini" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS">
@@ -113,7 +115,7 @@
                         <Insets top="4.0" />
                      </GridPane.margin>
                   </Text>
-                  <Label layoutX="10.0" layoutY="64.0" text="Kidato :" GridPane.rowIndex="3" />
+                  <Label layoutX="10.0" layoutY="64.0" styleClass="label-text" text="Kidato :" GridPane.rowIndex="3" />
                   <TextField fx:id="classFld" editable="false" layoutX="166.0" layoutY="59.0" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>

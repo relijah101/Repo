@@ -11,9 +11,9 @@
 
 <AnchorPane stylesheets="@../Styles/Default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="morogoro_lims.controller.technical.AddPublisher">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="97.0" prefWidth="215.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" prefHeight="140.0" prefWidth="298.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FOMU YA KUREKODI MCHAPISHAJI">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-title" text="FOMU YA KUREKODI MCHAPISHAJI">
                <font>
                   <Font size="17.0" />
                </font>

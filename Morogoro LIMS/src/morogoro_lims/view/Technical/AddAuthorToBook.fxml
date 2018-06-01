@@ -19,9 +19,9 @@
 
 <AnchorPane stylesheets="@../Styles/Default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="morogoro_lims.controller.technical.AddAuthorToBook">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="425.0" prefWidth="733.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" prefHeight="440.0" prefWidth="743.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FOMU YA KUREKODI WAANDISHI KWENYE VITABU">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-title" text="FOMU YA KUREKODI WAANDISHI KWENYE VITABU">
                <font>
                   <Font size="17.0" />
                </font>
@@ -91,7 +91,7 @@
                      <children>
                         <TextField fx:id="bookNumberFld" editable="false" focusTraversable="false" promptText="Namba ya kitabu" styleClass="textfield" />
                         <TextField fx:id="bookTitleFld" editable="false" focusTraversable="false" layoutX="10.0" layoutY="10.0" promptText="Jina la kitabu" styleClass="textfield" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Listi ya waandishi" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="Listi ya waandishi" />
                         <ListView fx:id="authorList" editable="false" focusTraversable="false" styleClass="textfield" VBox.vgrow="ALWAYS">
                            <contextMenu>
                               <ContextMenu>

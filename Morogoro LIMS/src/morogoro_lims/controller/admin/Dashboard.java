@@ -1,23 +1,26 @@
 package morogoro_lims.controller.admin;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 import morogoro_lims.controller.Misc;
 import morogoro_lims.model.User;
 
@@ -26,10 +29,8 @@ public class Dashboard implements Initializable{
     @FXML transient CheckMenuItem defaultCheckBox, redenCheckBox, darkenCheckBox, leftPaneCheckBox;
     @FXML transient Accordion menuAccordion;
     private transient static User user;
- 
-    public Dashboard(){
-        
-    }
+    private transient Scene scene;
+    public Dashboard(){}
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
@@ -84,7 +85,12 @@ public class Dashboard implements Initializable{
       
         menuBox.getChildren().addAll(searchMenu);
         dialog.show();
-        
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+        //dialog.close();
+    }
+    @FXML
+    public void onViewShortcuts(){
+        getPane("/morogoro_lims/view/Shortcuts.fxml");
     }
     @FXML
     public void onChangePassword(){
@@ -216,7 +222,20 @@ public class Dashboard implements Initializable{
     
     //Logout and Exit
     @FXML
-    public void onLogout(){
+    public void onLogout(MouseEvent event){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/morogoro_lims/view/Login.fxml"));
+        try{
+            loader.load();
+        }catch(IOException ioe){
+            Misc.display(ioe.getLocalizedMessage(), 2);
+        }        
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(loader.getRoot()));
+        
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);            
         
     }
     @FXML

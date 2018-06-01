@@ -15,7 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import morogoro_lims.model.Author;
 import morogoro_lims.model.Publisher;
-import morogoro_lims.model.connect.Query;
+import morogoro_lims.model.query.Query;
 
 public class PublisherTable implements Initializable{
     private final Query<Publisher> query = new Query();

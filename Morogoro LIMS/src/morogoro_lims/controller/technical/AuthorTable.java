@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import morogoro_lims.model.Author;
-import morogoro_lims.model.connect.Query;
+import morogoro_lims.model.query.Query;
 
 public class AuthorTable implements Initializable{
     private final Query<Author> query = new Query();

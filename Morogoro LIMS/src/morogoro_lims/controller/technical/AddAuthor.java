@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import morogoro_lims.controller.Misc;
 import morogoro_lims.controller.PatternMatch;
 import morogoro_lims.model.Author;
-import morogoro_lims.model.connect.Query;
+import morogoro_lims.model.query.Query;
 
 public class AddAuthor implements Initializable{
     private final Query<Author> query = new Query();

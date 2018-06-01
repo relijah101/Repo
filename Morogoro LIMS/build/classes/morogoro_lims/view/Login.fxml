@@ -21,7 +21,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="167.0" prefWidth="544.0" spacing="10.0" stylesheets="@Styles/Default.css" HBox.hgrow="ALWAYS">
                <children>
-                  <Text fx:id="titleText" strokeType="OUTSIDE" strokeWidth="0.0" text="MAKTABA YA MKOA WA MOROGORO">
+                  <Text fx:id="titleText" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="text-weight" text="MAKTABA YA MKOA WA MOROGORO">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -73,15 +73,15 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="369.0" prefWidth="393.0" spacing="5.0" style="-fx-background-color: #444444;" HBox.hgrow="ALWAYS">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Karibu," textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-bold" text="Karibu," textAlignment="CENTER" VBox.vgrow="ALWAYS">
                      <font>
                         <Font size="27.0" />
                      </font>
                   </Text>
-                  <Text fx:id="addressText" fill="#f2e3e3" strokeType="OUTSIDE" strokeWidth="0.0" />
-                  <Text fx:id="cityText" fill="#f2e3e3" layoutX="109.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-                  <Text fx:id="phoneText" fill="#f2e3e3" layoutX="109.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-                  <Text fx:id="emailText" fill="#f2e3e3" layoutX="109.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                  <Text fx:id="addressText" fill="#f2e3e3" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="link-label" />
+                  <Text fx:id="cityText" fill="#f2e3e3" layoutX="109.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="link-label" />
+                  <Text fx:id="phoneText" fill="#f2e3e3" layoutX="109.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="link-label" />
+                  <Text fx:id="emailText" fill="#f2e3e3" layoutX="109.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="link-label" />
                </children>
                <effect>
                   <Lighting>

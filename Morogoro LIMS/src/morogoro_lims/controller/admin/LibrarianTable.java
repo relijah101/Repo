@@ -19,7 +19,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import morogoro_lims.controller.Misc;
 import morogoro_lims.model.Librarian;
-import morogoro_lims.model.connect.Query;
+import morogoro_lims.model.query.Query;
 
 public class LibrarianTable implements Initializable{
     private final Query<Librarian> query = new Query();

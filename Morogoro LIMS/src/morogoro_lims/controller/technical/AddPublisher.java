@@ -10,7 +10,7 @@ import morogoro_lims.controller.PatternMatch;
 import morogoro_lims.controller.admin.Dashboard;
 import morogoro_lims.model.Publisher;
 import morogoro_lims.model.User;
-import morogoro_lims.model.connect.Query;
+import morogoro_lims.model.query.Query;
 
 public class AddPublisher implements Initializable{
     Dashboard dash = new Dashboard();

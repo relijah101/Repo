@@ -16,7 +16,7 @@ import morogoro_lims.controller.Misc;
 import morogoro_lims.controller.PatternMatch;
 import morogoro_lims.model.Department;
 import morogoro_lims.model.Librarian;
-import morogoro_lims.model.connect.Query;
+import morogoro_lims.model.query.Query;
 
 public class RegisterLibrarian implements Initializable{
     private final Query<Librarian> query = new Query();

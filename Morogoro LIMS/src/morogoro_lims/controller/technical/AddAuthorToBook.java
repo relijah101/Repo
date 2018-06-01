@@ -17,7 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import morogoro_lims.model.Author;
 import morogoro_lims.model.Book;
-import morogoro_lims.model.connect.Query;
+import morogoro_lims.model.query.Query;
 
 public class AddAuthorToBook implements Initializable{
     private final Query<Book> bookQuery = new Query();

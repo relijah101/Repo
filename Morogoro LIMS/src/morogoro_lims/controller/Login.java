@@ -8,16 +8,18 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import morogoro_lims.controller.admin.Dashboard;
 import morogoro_lims.model.Info;
 import morogoro_lims.model.User;
-import morogoro_lims.model.connect.Query;
+import morogoro_lims.model.query.Query;
 
 public class Login implements Initializable{
     private final Query<Info> query = new Query();
@@ -25,8 +27,10 @@ public class Login implements Initializable{
     @FXML private PasswordField passwordFld;
     @FXML private Text loginStatusText, titleText, addressText, cityText, phoneText, emailText;
     
+    private Stage loginStage;
     private int count = 0;
     private ObservableList<Info> infoData = query.select(Query.INFO_TABLE, 1);
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         titleText.setText(infoData.get(0).getName().toUpperCase());
@@ -37,7 +41,7 @@ public class Login implements Initializable{
     }
     
     @FXML
-    private void onLoggingIn(){        
+    private void onLoggingIn(MouseEvent event){        
         String name = usernameFld.getText();
         String pass = passwordFld.getText();
         
@@ -72,13 +76,21 @@ public class Login implements Initializable{
             Dashboard dashboard = loader.getController();
             dashboard.initUser(user);
             
-            
             Parent parent = loader.getRoot();
             Stage stage = new Stage();
             stage.setTitle("Mfumo wa Kumeneji Taarifa za Maktaba Ya Mkoa wa Morogoro.");
             stage.setScene(new Scene(parent));
             stage.show();
-                      
+            
+            loginStage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            hideStage();
         }
+    }
+    
+    public void showStage(){
+        loginStage.show();
+    }
+    public void hideStage(){
+        loginStage.hide();
     }
 }

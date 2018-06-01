@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import morogoro_lims.model.Category;
-import morogoro_lims.model.connect.Query;
+import morogoro_lims.model.query.Query;
 
 public class CategoryTable implements Initializable{
     private final Query<Category> query = new Query();
