@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../Styles/Default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="morogoro_lims.controller.technical.BookAuthor">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="171.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" spacing="4.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="TOP_CENTER" styleClass="label-text" text="WANACHAMA WANAFUNZI WA SEKONDARI WALIOANDIKISHWA" />
+            <TextField fx:id="searchFld" onKeyReleased="#onSearching" promptText="Tafuta mwanachama" styleClass="textfield" />
+            <TableView fx:id="membersTable" onMouseClicked="#onTableClicked" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+              <columns>
+                  <TableColumn fx:id="regCol" prefWidth="75.0" text="Namba" />
+                <TableColumn fx:id="firstnameCol" prefWidth="75.0" text="Jina la kwanza" />
+                <TableColumn fx:id="middlenameCol" prefWidth="75.0" text="Jina la kati" />
+                  <TableColumn fx:id="lastnameCol" prefWidth="75.0" text="Jina la ukoo" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#onSeeMore" text="Ona taarifa kamili" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+   </padding>
+</AnchorPane>
