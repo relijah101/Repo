@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="main_dash" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="956.0" stylesheets="@../Styles/Default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="morogoro_lims.controller.admin.Dashboard">
+<BorderPane fx:id="main_dash" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="956.0" stylesheets="@../Styles/Default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="morogoro_lims.controller.admin.AdminDash">
    <left>
       <Accordion fx:id="menuAccordion" prefHeight="550.0" prefWidth="275.0">
         <panes>
@@ -153,6 +153,15 @@
                               <String fx:value="label-text" />
                            </styleClass>
                         </Label>
+                        <Label layoutX="21.0" layoutY="257.0" onMouseClicked="#onBooksAndAuthor" prefHeight="23.0" prefWidth="258.0" text="Vitabu na waandishi">
+                           <padding>
+                              <Insets bottom="3.0" left="2.0" top="3.0" />
+                           </padding>
+                           <styleClass>
+                              <String fx:value="link-label" />
+                              <String fx:value="label-text" />
+                           </styleClass>
+                        </Label>
                      </children>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -167,7 +176,7 @@
                <content>
                   <VBox prefHeight="257.0" prefWidth="276.0" spacing="5.0">
                      <children>
-                        <Label prefHeight="23.0" prefWidth="260.0" text="Azimisha kitabu">
+                        <Label onMouseClicked="#onIssueBook" prefHeight="23.0" prefWidth="260.0" text="Azimisha kitabu">
                            <padding>
                               <Insets bottom="3.0" left="2.0" top="3.0" />
                            </padding>
@@ -176,7 +185,7 @@
                               <String fx:value="label-text" />
                            </styleClass>
                         </Label>
-                        <Label layoutX="21.0" layoutY="21.0" prefHeight="23.0" prefWidth="264.0" text="Rudisha kitabu">
+                        <Label layoutX="21.0" layoutY="21.0" onMouseClicked="#onReturnBook" prefHeight="23.0" prefWidth="264.0" text="Rudisha kitabu">
                            <padding>
                               <Insets bottom="3.0" left="2.0" top="3.0" />
                            </padding>
@@ -640,6 +649,13 @@
       </HBox>
    </top>
    <bottom>
-      <HBox prefHeight="20.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+      <HBox alignment="TOP_RIGHT" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label styleClass="label-text" text="Mtumiaji :" />
+            <Label fx:id="usernameLbl" styleClass="label-text" text="Label" />
+         </children>
+         <padding>
+            <Insets right="4.0" />
+         </padding></HBox>
    </bottom>
 </BorderPane>

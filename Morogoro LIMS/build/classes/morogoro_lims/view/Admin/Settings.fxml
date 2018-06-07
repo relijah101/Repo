@@ -2,11 +2,15 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -17,7 +21,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="422.0" prefWidth="700.0" stylesheets="@../Styles/Default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="422.0" prefWidth="700.0" stylesheets="@../Styles/Default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="morogoro_lims.controller.admin.Settings">
    <children>
       <TabPane prefHeight="286.0" prefWidth="670.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -39,11 +43,11 @@
                                  </rowConstraints>
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="Jina la kitengo :" GridPane.rowIndex="2" />
-                                    <TextField styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="depFld" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="8.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
                                        <children>
-                                          <Button mnemonicParsing="false" styleClass="clear-btn" text="Futa" />
-                                          <Button mnemonicParsing="false" text="Hifadhi" />
+                                          <Button mnemonicParsing="false" onAction="#onClearDep" styleClass="clear-btn" text="Futa" />
+                                          <Button mnemonicParsing="false" onAction="#onSaveDep" text="Hifadhi" />
                                        </children>
                                        <padding>
                                           <Insets right="10.0" />
@@ -64,7 +68,20 @@
                                     <Font size="17.0" />
                                  </font>
                               </Label>
-                              <ListView prefHeight="200.0" prefWidth="200.0" />
+                              <ListView fx:id="departmentListView" onMouseClicked="#onListViewClicked" prefHeight="200.0" prefWidth="200.0">
+                                 <contextMenu>
+                                    <ContextMenu>
+                                      <items>
+                                        <MenuItem mnemonicParsing="false" onAction="#onEditDep" text="Badili Kitengo" />
+                                          <SeparatorMenuItem mnemonicParsing="false" />
+                                          <MenuItem mnemonicParsing="false" onAction="#onDeleteDep" text="Futa kitengo">
+                                             <accelerator>
+                                                <KeyCodeCombination alt="UP" code="DELETE" control="UP" meta="UP" shift="UP" shortcut="ANY" />
+                                             </accelerator>
+                                          </MenuItem>
+                                      </items>
+                                    </ContextMenu>
+                                 </contextMenu></ListView>
                            </children>
                         </VBox>
                      </children>
@@ -93,22 +110,23 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="Jina la taasisi :" GridPane.rowIndex="2" />
                                           <Text layoutX="10.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="Mkoa :" GridPane.rowIndex="4" />
                                           <Text layoutX="10.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="Anuani :" GridPane.rowIndex="3" />
                                           <Text layoutX="10.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="Simu :" GridPane.rowIndex="5" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="Barua pepe :" GridPane.rowIndex="6" />
-                                          <TextField styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <TextField styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <TextField styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <TextField styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                          <TextField styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="Barua pepe :" GridPane.rowIndex="7" />
+                                          <TextField fx:id="nameFld" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <TextField fx:id="addressFld" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <TextField fx:id="regionFld" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <TextField fx:id="phoneFld1" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <TextField fx:id="emailFld" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                           <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="8.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                              <children>
-                                                <Button mnemonicParsing="false" styleClass="clear-btn" text="Futa" />
-                                                <Button mnemonicParsing="false" text="Hifadhi" />
+                                                <Button mnemonicParsing="false" onAction="#onClearSettings" styleClass="clear-btn" text="Futa" />
+                                                <Button mnemonicParsing="false" onAction="#onSaveSettings" text="Hifadhi" />
                                              </children>
                                              <padding>
                                                 <Insets right="10.0" />
@@ -126,27 +144,34 @@
                                                 <Insets bottom="5.0" />
                                              </padding>
                                           </StackPane>
-                                          <Text stroke="#8a3737" strokeType="OUTSIDE" strokeWidth="0.0" text="Taasisi" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                          <Text fx:id="nameText" stroke="#8a3737" strokeType="OUTSIDE" strokeWidth="0.0" text="Taasisi" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                              <GridPane.margin>
                                                 <Insets left="10.0" />
                                              </GridPane.margin>
                                           </Text>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Anuani" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                          <Text fx:id="addressText" strokeType="OUTSIDE" strokeWidth="0.0" text="Anuani" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                              <GridPane.margin>
                                                 <Insets left="10.0" />
                                              </GridPane.margin>
                                           </Text>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mkoa" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                          <Text fx:id="regionText" strokeType="OUTSIDE" strokeWidth="0.0" text="Mkoa" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                              <GridPane.margin>
                                                 <Insets left="10.0" />
                                              </GridPane.margin>
                                           </Text>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Simu" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                          <Text fx:id="phone1Text" strokeType="OUTSIDE" strokeWidth="0.0" text="Simu" GridPane.columnIndex="2" GridPane.rowIndex="5">
                                              <GridPane.margin>
                                                 <Insets left="10.0" />
                                              </GridPane.margin>
                                           </Text>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Barua pepe" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                                          <Text fx:id="emailText" strokeType="OUTSIDE" strokeWidth="0.0" text="Barua pepe" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                                             <GridPane.margin>
+                                                <Insets left="10.0" />
+                                             </GridPane.margin>
+                                          </Text>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="Simu :" GridPane.rowIndex="6" />
+                                          <TextField fx:id="phoneFld2" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <Text fx:id="phone2Text" strokeType="OUTSIDE" strokeWidth="0.0" text="Simu" GridPane.columnIndex="2" GridPane.rowIndex="6">
                                              <GridPane.margin>
                                                 <Insets left="10.0" />
                                              </GridPane.margin>
@@ -163,11 +188,6 @@
                      </children></AnchorPane>
                </content>
           </Tab>
-            <Tab text="Uazimishaji">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-               </content>
-            </Tab>
         </tabs>
       </TabPane>
    </children>

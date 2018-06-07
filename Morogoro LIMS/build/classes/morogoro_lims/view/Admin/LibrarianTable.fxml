@@ -30,7 +30,7 @@
                   <TextField fx:id="searchLibrarian" onKeyReleased="#onSearchLibrarian" promptText="Tafuta mkutubi" styleClass="textfield" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <TableView fx:id="librarianTable" onMouseClicked="#onLibClicked">
+            <TableView fx:id="librarianTable" onMouseClicked="#onLibClicked" VBox.vgrow="ALWAYS">
               <columns>
                 <TableColumn fx:id="fNameCol" prefWidth="75.0" text="Jina la kwanza" />
                 <TableColumn fx:id="mNameCol" prefWidth="75.0" text="Jina la kati" />
@@ -47,9 +47,9 @@
                <contextMenu>
                   <ContextMenu>
                     <items>
-                      <MenuItem mnemonicParsing="false" onAction="#onViewLibrarian" text="Ona" />
+                      <MenuItem mnemonicParsing="false" onAction="#onViewLibrarian" text=" Ona zaidi" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#onBlockLibrarian" text="Sitisha" />
+                        <MenuItem mnemonicParsing="false" onAction="#onBlockLibrarian" text="Sitisha mkutubi" />
                     </items>
                   </ContextMenu>
                </contextMenu>

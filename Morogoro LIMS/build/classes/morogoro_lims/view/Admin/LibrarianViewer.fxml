@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
@@ -22,7 +22,13 @@
    <children>
       <HBox alignment="CENTER" layoutX="5.0" layoutY="2.0" prefHeight="509.0" prefWidth="752.0" spacing="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="304.0" fitWidth="386.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
+            <VBox alignment="CENTER" spacing="8.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fx:id="imageViewPane" fitHeight="304.0" fitWidth="386.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
+                  <TextField fx:id="picNameFld" alignment="CENTER" disable="true" editable="false" styleClass="textfield" VBox.vgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#onChangePhoto" text="Badili picha" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
             <VBox alignment="TOP_CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
                   <GridPane hgap="5.0" vgap="4.0" VBox.vgrow="ALWAYS">
@@ -47,15 +53,14 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <TextField fx:id="regFld" promptText="Namba ya uandikishaji" styleClass="textfield" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
-                        <TextField fx:id="fNameFld" disable="true" promptText="Jina la kwanza" styleClass="textfield" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
-                        <TextField fx:id="mNameFld" disable="true" promptText="Jina la kati" styleClass="textfield" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
-                        <TextField fx:id="lNameFld" disable="true" promptText="Jina la ukoo" styleClass="textfield" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
-                        <TextField fx:id="phone1Fld" disable="true" promptText="Simu 1" styleClass="textfield" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS" />
-                        <TextField fx:id="phone2Fld" disable="true" promptText="Simu 2" styleClass="textfield" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.vgrow="ALWAYS" />
-                        <TextField fx:id="addressFld" disable="true" promptText="Sanduku la posta" styleClass="textfield" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.vgrow="ALWAYS" />
-                        <TextField fx:id="streetFld" disable="true" promptText="Mtaa" styleClass="textfield" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="11" GridPane.vgrow="ALWAYS" />
-                        <TextField fx:id="departmentFld" disable="true" promptText="Kitengo" styleClass="textfield" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="13" GridPane.vgrow="ALWAYS" />
+                        <TextField fx:id="regFld" disable="true" editable="false" promptText="Namba ya uandikishaji" styleClass="textfield" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+                        <TextField fx:id="fNameFld" promptText="Jina la kwanza" styleClass="textfield" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
+                        <TextField fx:id="mNameFld" promptText="Jina la kati" styleClass="textfield" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+                        <TextField fx:id="lNameFld" promptText="Jina la ukoo" styleClass="textfield" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
+                        <TextField fx:id="phone1Fld" promptText="Simu 1" styleClass="textfield" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS" />
+                        <TextField fx:id="phone2Fld" promptText="Simu 2" styleClass="textfield" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.vgrow="ALWAYS" />
+                        <TextField fx:id="addressFld" promptText="Sanduku la posta" styleClass="textfield" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.vgrow="ALWAYS" />
+                        <TextField fx:id="streetFld" promptText="Mtaa" styleClass="textfield" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="11" GridPane.vgrow="ALWAYS" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="Jina la kwanza :" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="Jina la kati :" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="Jina la ukoo :" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
@@ -108,17 +113,13 @@
                               <Insets right="5.0" />
                            </padding>
                         </StackPane>
+                        <ComboBox fx:id="depFld" promptText="Kitengo" styleClass="textfield" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="13" GridPane.vgrow="ALWAYS" />
                      </children>
                   </GridPane>
                   <HBox alignment="CENTER" spacing="10.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Futa">
-                           <styleClass>
-                              <String fx:value="delete-btn" />
-                              <String fx:value="button" />
-                           </styleClass>
-                        </Button>
-                        <Button mnemonicParsing="false" text="Badilisha" />
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onClear" styleClass="clear-btn" text="Rudisha" />
+                        <Button mnemonicParsing="false" onAction="#onUpdateInfo" text="Badilisha" />
                      </children>
                   </HBox>
                </children>
