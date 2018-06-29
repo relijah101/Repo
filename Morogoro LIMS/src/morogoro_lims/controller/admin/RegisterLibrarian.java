@@ -1,13 +1,14 @@
 package morogoro_lims.controller.admin;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -24,12 +25,14 @@ public class RegisterLibrarian implements Initializable{
     @FXML private TextField picNameFld, regNumberFld, fNameFld, mNameFld, lNameFld, addressFld, phone1Fld, phone2Fld, streetFld; 
     @FXML private PasswordField passwordFld;
     @FXML private ComboBox departmentFld;
+    
     byte[] photo = null;
     ObservableList<String> depList = depSql.select(Query.DEPARTMENT_TABLE, 1);
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         departmentFld.setItems(depList);
-    }
+    }    
     public void reset(){
         picNameFld.setText("");
         regNumberFld.setText(""); 
@@ -44,10 +47,11 @@ public class RegisterLibrarian implements Initializable{
         photo = null;
         departmentFld.getSelectionModel().select(-1);
     }
+    
     @FXML
     public void onUploadPhoto(){
         FileChooser chooser = new FileChooser();
-        chooser.setTitle("Choose a photo:");
+        chooser.setTitle("Chagua picha: ");
         chooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("JPEG", "*.jpg", "*.jpeg", "*.jpe", "*.jfif"),
                 new FileChooser.ExtensionFilter("GIF", "*.gif"),
@@ -62,10 +66,26 @@ public class RegisterLibrarian implements Initializable{
             }
             picNameFld.setText(chosenFile.getName());
             
+            try{
+                FileInputStream fileInput = new FileInputStream(chosenFile);
+                ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
+                byte[] buffer = new byte[1024]; 
+                
+                for(int readNum; (readNum = fileInput.read())!= -1;){
+                    byteOutput.write(buffer, 0, readNum);
+                }
+                photo = byteOutput.toByteArray();
+            }catch(IOException ioe){
+                Misc.display("Picha haijapatikana\n" + ioe.getLocalizedMessage(), 1);
+            }
         }
     }
     @FXML
     public void onSaveLibrarian(){
+        if(departmentFld.getSelectionModel().getSelectedIndex() == -1){
+            Misc.display("Hakikisha fomu imejazwa", 1);
+            return;
+        }
         String regNumber = regNumberFld.getText();
         String fname = fNameFld.getText();
         String mname = mNameFld.getText();
@@ -160,9 +180,8 @@ public class RegisterLibrarian implements Initializable{
             passwordFld.requestFocus();
             return;
         }
-        byte status = 1;
         Department depart = new Department(Long.parseLong(department.split("/ ")[0]),department.split("/ ")[1]);
-        Librarian librarian = new Librarian(regNumber, fname, mname, lname, depart, address, phone1, phone2, pwd, street, "Morogoro", status, photo);
+        Librarian librarian = new Librarian(regNumber, fname, mname, lname, depart, address, phone1, phone2, pwd, street, "Morogoro", 1, photo);
         boolean val = query.insert(librarian, Query.LIBRARIAN_TABLE);
         if(val) reset();
     }

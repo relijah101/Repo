@@ -4,9 +4,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Secondary extends Member{
-    private final StringProperty grade;
-    private final StringProperty school;
-    private final StringProperty schoolAddr;
+    private StringProperty grade;
+    private StringProperty school;
+    private StringProperty schoolAddr;
 
     public Secondary(Long id, String reg, String fName, String mName, String lName, String postal, String phone1, String phone2, 
             String idType, String idNumber, String street, String region, String status, String grade, String school, 
@@ -16,6 +16,9 @@ public class Secondary extends Member{
         this.grade = new SimpleStringProperty(grade);
         this.school = new SimpleStringProperty(school);
         this.schoolAddr = new SimpleStringProperty(schoolAddr);
+    }
+    public Secondary(Long id, String reg, String receipt, String startDate, String endDate) {
+        super(id, reg, receipt, startDate, endDate);
     }
     public Secondary(Long id, String fName, String mName, String lName, String postal, String phone1, String phone2, 
             String idType, String idNumber, String street, String region, String grade, String school, String schoolAddr) {

@@ -15,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import morogoro_lims.controller.Misc;
 import morogoro_lims.model.Author;
 import morogoro_lims.model.Book;
 import morogoro_lims.model.query.Query;
@@ -29,11 +30,11 @@ public class AddAuthorToBook implements Initializable{
     @FXML TableView<Author> authorTable;
     @FXML TableColumn<Author, String> authorNameCol, authorIdCol;
     
-    @FXML ListView<String> authorList;
+    @FXML ListView<Author> authorList;
     @FXML MenuItem addAuthor, removeAuthor;
     
     private Long bookId, authorId;
-    ObservableList<String> authors = FXCollections.observableArrayList();
+    ObservableList<Author> authors = FXCollections.observableArrayList();
     ObservableList<Author> authorsList;
     ObservableList<Book> bookList;
     @Override
@@ -45,6 +46,15 @@ public class AddAuthorToBook implements Initializable{
         
         authorList.setItems(authors);
         addAuthor.setDisable(true);
+    }
+    public void reset(){
+        searchBook.setText("");
+        searchAuthor.setText("");
+        bookNumberFld.setText("");
+        bookTitleFld.setText("");
+        authorTable.getSelectionModel().clearSelection();
+        bookTable.getSelectionModel().clearSelection();
+        authors.clear();
     }
     public void initBookTable(){
         bookTable.getItems().clear();
@@ -126,7 +136,11 @@ public class AddAuthorToBook implements Initializable{
     }
     @FXML
     public void onAddAuthorToBook(){
-        authors.add(authorTable.getSelectionModel().getSelectedItem().getId()+"/ "+authorTable.getSelectionModel().getSelectedItem().getFullName());
+        if(authors.contains(authorTable.getSelectionModel().getSelectedItem())){
+            Misc.display("Mwandishi ameshaongezwa tayari.", 1);
+            return;
+        }
+        authors.add(authorTable.getSelectionModel().getSelectedItem());
         authorTable.getSelectionModel().clearSelection();
     }
     @FXML
@@ -160,6 +174,13 @@ public class AddAuthorToBook implements Initializable{
     }
     @FXML
     public void onSave(){
+        if(bookId != null && !authors.isEmpty()){
+            Object[] obj = {bookId, authors};
         
+            Query<Object> query = new Query<>();
+            query.insert(obj, Query.BOOK_AUTHOR_TABLE);
+            reset();
+            Misc.display("Waandishi wa kitabu wamehifadhiwa.", 0);
+        }        
     }
 }

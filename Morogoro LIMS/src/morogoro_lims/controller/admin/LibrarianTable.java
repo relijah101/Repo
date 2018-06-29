@@ -22,9 +22,8 @@ import morogoro_lims.model.Librarian;
 import morogoro_lims.model.query.Query;
 
 public class LibrarianTable implements Initializable{
-    private final Query<Librarian> query = new Query();
-    ObservableList<Librarian> librarianList = query.select(Query.LIBRARIAN_TABLE, 1);
-    
+    private final Query<Librarian> query = new Query();   
+    ObservableList<Librarian> librarianList;
     @FXML private TableView<Librarian> librarianTable;
     @FXML private TableColumn<Librarian, String> fNameCol, mNameCol, lNameCol, depCol, phone1Col, phone2Col, addrCol, streetCol;
     @FXML private TextField searchLibrarian;
@@ -32,11 +31,18 @@ public class LibrarianTable implements Initializable{
     private Long libId;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(!librarianList.isEmpty()){
-            librarianTable.setItems(librarianList);      
-        }else{   
+        initTable();
+        initCols();
+    }
+    public void initTable(){
+        librarianList = query.select(Query.LIBRARIAN_TABLE, 1);
+        if (!librarianList.isEmpty()) {
+            librarianTable.setItems(librarianList);
+        } else {
             librarianTable.setPlaceholder(new StackPane(new Text("Hakuna mkutubi aliyesajiliwa")));
         }
+    }
+    public void initCols(){
         fNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         mNameCol.setCellValueFactory(new PropertyValueFactory<>("middleName"));
         lNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
@@ -52,11 +58,12 @@ public class LibrarianTable implements Initializable{
         searchLibrarian.textProperty().addListener((observable, oldValue, newValue)->{
             filteredData.setPredicate(librarian->{
                 if(newValue == null || newValue.isEmpty()) return true;
-                if(librarian.getStreet().toLowerCase().equals(newValue.toLowerCase())) return true;
-                if(librarian.getFirstName().toLowerCase().equals(newValue.toLowerCase())) return true;
-                if(librarian.getMiddleName().toLowerCase().equals(newValue.toLowerCase())) return true;
-                if(librarian.getLastName().toLowerCase().equals(newValue.toLowerCase())) return true;
-                if(librarian.getDepartment().toLowerCase().equals(newValue.toLowerCase())) return true;
+                
+                if(librarian.getFirstName().toLowerCase().contains(newValue.toLowerCase())) return true;
+                if(librarian.getMiddleName().toLowerCase().contains(newValue.toLowerCase())) return true;
+                if(librarian.getLastName().toLowerCase().contains(newValue.toLowerCase())) return true;
+                if(librarian.getDepartment().toLowerCase().contains(newValue.toLowerCase())) return true;
+                if(librarian.getStreet().toLowerCase().contains(newValue.toLowerCase())) return true;
                 return false;
             });
         });
@@ -88,15 +95,19 @@ public class LibrarianTable implements Initializable{
             Stage stage = new Stage();
             stage.setTitle("Taarifa za " + lib.getFirstName()+" "+lib.getMiddleName()+" "+lib.getLastName());
             stage.setScene(scene);
-            stage.show();
-            
+            stage.show();            
         }    
     }
     @FXML
     public void onBlockLibrarian(){
         if(librarianTable.getSelectionModel().getSelectedItem() != null){
-            
+            libId = librarianTable.getSelectionModel().getSelectedItem().getId();
+            String reg = librarianTable.getSelectionModel().getSelectedItem().getReg();
+            if(Query.blockLibrarian(reg, "0")){
+               initTable(); 
+            }
             
         }  
     }   
+    
 }

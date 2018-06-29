@@ -56,4 +56,9 @@ public class Author {
     public StringProperty getFirstNameProperty() {return firstName;}
     public StringProperty getMiddleNameProperty() {return middleName;}
     public StringProperty getLastNameProperty() {return lastName;}
+    //to string
+    @Override
+    public String toString(){
+        return id.get()+" / " + fullName;
+    }
 }

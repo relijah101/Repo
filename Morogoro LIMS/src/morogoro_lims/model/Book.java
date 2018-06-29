@@ -15,15 +15,17 @@ public class Book {
     Category cat;
     Publisher pub;
     private LongProperty id;
+    private LongProperty catId;
+    private LongProperty pubId;
     private final StringProperty classNumber;
     private final StringProperty title;
-    private final StringProperty category;
-    private final IntegerProperty edition;
-    private final IntegerProperty copies;
-    private final StringProperty publisher;
-    private final StringProperty isbn;
-    private final BooleanProperty reference;
-    private final ObservableList<Author> authors = FXCollections.observableArrayList();
+    private StringProperty category;
+    private IntegerProperty edition;
+    private IntegerProperty copies;
+    private StringProperty publisher;    
+    private StringProperty isbn;
+    private BooleanProperty reference;
+    private ObservableList<Author> authors = FXCollections.observableArrayList();
 
     public Book(Long id, String classNumber, String title, Category category, int edition, int copies, Publisher publisher, String isbn, boolean reference) {
         this.cat = category;
@@ -35,6 +37,7 @@ public class Book {
         this.edition = new SimpleIntegerProperty(edition);
         this.copies = new SimpleIntegerProperty(copies);
         this.publisher = new SimpleStringProperty(publisher.getPublisher());
+        this.pubId = new SimpleLongProperty(publisher.getId());
         this.isbn = new SimpleStringProperty(isbn);
         this.reference = new SimpleBooleanProperty(reference);
     }
@@ -47,17 +50,35 @@ public class Book {
         this.edition = new SimpleIntegerProperty(edition);
         this.copies = new SimpleIntegerProperty(copies);
         this.publisher = new SimpleStringProperty(publisher.getPublisher());
+        this.pubId = new SimpleLongProperty(publisher.getId());
         this.isbn = new SimpleStringProperty(isbn);
         this.reference = new SimpleBooleanProperty(reference);
+    }
+    public Book(String classNumber, String title, Long catId, int edition, int copies, Long pubId, String isbn, boolean reference) {
+        this.classNumber = new SimpleStringProperty(classNumber);
+        this.title = new SimpleStringProperty(title);
+        this.catId = new SimpleLongProperty(catId);
+        this.edition = new SimpleIntegerProperty(edition);
+        this.copies = new SimpleIntegerProperty(copies);
+        this.pubId = new SimpleLongProperty(pubId);
+        this.isbn = new SimpleStringProperty(isbn);
+        this.reference = new SimpleBooleanProperty(reference);
+    }
+    public Book(String classNumber, String title, ObservableList author) {
+        this.classNumber = new SimpleStringProperty(classNumber);
+        this.title = new SimpleStringProperty(title);
+        this.authors = author;
     }
     //Getters
     public Long getId() {return id.get();}
     public String getClassNumber() {return classNumber.get();}
     public String getTitle() {return title.get();}
+    public Long getCatId(){return catId.get();}
     public Long getCategoryId(){return cat.getId();}
     public String getCategory() {return category.get();}
     public int getEdition() {return edition.get();}
     public int getCopies() {return copies.get();}
+    public Long getPubId() {return pubId.get();}
     public Long getPublisherId(){return pub.getId();}
     public String getPublisher() {return publisher.get();}
     public String getIsbn() {return isbn.get();}
@@ -75,5 +96,11 @@ public class Book {
     public StringProperty getIsbnProperty() {return isbn;}
     public BooleanProperty getReferenceProperty() {return reference;}
     //public ObservableList<Author> getAuthors() {return authors;}
+
+    @Override
+    public String toString() {
+        return classNumber.get() + "\t" + title.get();
+    }
+    
     
 }

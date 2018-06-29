@@ -7,13 +7,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import morogoro_lims.controller.Misc;
 import morogoro_lims.controller.PatternMatch;
-import morogoro_lims.controller.admin.Dashboard;
+import morogoro_lims.controller.admin.AdminDash;
 import morogoro_lims.model.Publisher;
 import morogoro_lims.model.User;
 import morogoro_lims.model.query.Query;
 
 public class AddPublisher implements Initializable{
-    Dashboard dash = new Dashboard();
+    AdminDash dash = new AdminDash();
     @FXML private TextField nameFld;
     @Override
     public void initialize(URL location, ResourceBundle resources) {

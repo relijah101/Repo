@@ -1,6 +1,8 @@
 package morogoro_lims.model;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -19,11 +21,11 @@ public class Librarian{
     private final StringProperty password;
     private final StringProperty street;
     private final StringProperty region;
-    private final byte status;
+    private final IntegerProperty status;
     private final byte[] photo;
     
 
-    public Librarian(Long id, String reg, String fName, String mName, String lName, Department dep, String postal, String phone1, String phone2, String password, String street, String region, byte status, byte[] photo) {
+    public Librarian(Long id, String reg, String fName, String mName, String lName, Department dep, String postal, String phone1, String phone2, String password, String street, String region, int status, byte[] photo) {
         this.id = new SimpleLongProperty(id);
         this.reg = new SimpleStringProperty(reg);
         this.firstName = new SimpleStringProperty(fName);
@@ -36,11 +38,11 @@ public class Librarian{
         this.password = new SimpleStringProperty(password);
         this.street = new SimpleStringProperty(street);
         this.region = new SimpleStringProperty(region);
-        this.status = status;
+        this.status = new SimpleIntegerProperty(status);
         this.photo = photo;
         this.dep = dep;
     }
-    public Librarian(String reg, String fName, String mName, String lName, Department dep, String postal, String phone1, String phone2, String password, String street, String region, byte status, byte[] photo) {
+    public Librarian(String reg, String fName, String mName, String lName, Department dep, String postal, String phone1, String phone2, String password, String street, String region, int status, byte[] photo) {
         this.reg = new SimpleStringProperty(reg);
         this.firstName = new SimpleStringProperty(fName);
         this.middleName = new SimpleStringProperty(mName);
@@ -52,7 +54,7 @@ public class Librarian{
         this.password = new SimpleStringProperty(password);
         this.street = new SimpleStringProperty(street);
         this.region = new SimpleStringProperty(region);
-        this.status = status;
+        this.status = new SimpleIntegerProperty(status);
         this.photo = photo;
         this.dep = dep;
     }
@@ -70,7 +72,7 @@ public class Librarian{
     public String getPassword() {return password.get();}
     public String getStreet() {return street.get();}
     public String getRegion() {return region.get();}
-    public byte getStatus() {return status;}
+    public int getStatus() {return status.get();}
     public byte[] getPhoto() {return photo;}
     //Property Getters
     public LongProperty getIdProperty() {return id;}

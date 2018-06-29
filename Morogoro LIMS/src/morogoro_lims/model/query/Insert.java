@@ -11,13 +11,6 @@ public class Insert{
         /**
          * Removing column that holds NULL value or blank value
          */
-        if(!colsAndData.isEmpty()){
-            for(Map.Entry<String, String> entry : colsAndData.entrySet()){
-                if(entry.getValue() == null || entry.getValue().isEmpty()){
-                    colsAndData.remove(entry.getKey());
-                }
-            }
-        }
         
         /**
          * Making the insert query
@@ -52,11 +45,11 @@ public class Insert{
     }
     
     public static void main(String[] args){
-        Map<String, String> map = new HashMap<>();
-        map.put("title", "book_title");
-        map.put("author", "author_name");
-        map.put("category", "category_name");
+        Map<String, String> dataCols = new HashMap<>();
+        dataCols.put("member_id", "?");
+        dataCols.put("registration_number", "?");
+        dataCols.put("librarian_id", "?");
         
-        System.out.println(sql("table", map));
+        System.out.println(sql("table", dataCols));
     }
 }

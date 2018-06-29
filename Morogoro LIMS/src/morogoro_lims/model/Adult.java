@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Adult extends Member{
-    private final StringProperty houseNumber;
+    private StringProperty houseNumber;
     private StringProperty office;
     private StringProperty sponsor;
     private StringProperty title;
@@ -16,6 +16,13 @@ public class Adult extends Member{
         super(id, reg, fName, mName, lName, postal, phone1, phone2, idType, idNumber, street, region, status, receipt, 
                 startDate, endDate, photo);
         this.houseNumber = new SimpleStringProperty(houseNumber);
+        this.office = new SimpleStringProperty(office);
+        this.sponsor = new SimpleStringProperty(sponsor);
+        this.title = new SimpleStringProperty(title);
+        this.reference = new SimpleStringProperty(reference);
+    }
+    public Adult(Long id, String reg, String receipt, String startDate, String endDate,String office, String sponsor, String title, String reference) {
+        super(id, reg, receipt, startDate, endDate);
         this.office = new SimpleStringProperty(office);
         this.sponsor = new SimpleStringProperty(sponsor);
         this.title = new SimpleStringProperty(title);

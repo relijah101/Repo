@@ -50,7 +50,10 @@ public class PublisherTable implements Initializable{
                 }
                 
                 String lowerCaseValue = newValue.toLowerCase();
-                return pub.getPublisher().toLowerCase().equals(lowerCaseValue);
+                if(pub.getPublisher().toLowerCase().equals(lowerCaseValue))
+                    return true;
+                
+                return false;
             });
         });
         SortedList sortedList = new SortedList<>(filteredData);

@@ -64,7 +64,6 @@
 }
 .label-title-small{    
     -fx-text-fill: #96b946;
-    -fx-font-size: 14px;
 }
 .label-stack-pane{
     -fx-background-color: #3c3c3c;

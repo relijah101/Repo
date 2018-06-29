@@ -1,22 +1,16 @@
 package morogoro_lims;
 
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import morogoro_lims.controller.Misc;
-import morogoro_lims.controller.admin.Dashboard;
+import morogoro_lims.controller.admin.AdminDash;
 
 public class Main extends Application{
     Stage stage;
-    Dashboard dash = new Dashboard();
+    AdminDash dash = new AdminDash();
     @Override
     public void start(Stage stage) throws Exception {       
         AnchorPane dashboard = FXMLLoader.load(getClass().getResource("/morogoro_lims/view/Login.fxml"));
@@ -42,7 +36,7 @@ public class Main extends Application{
 //            
 //            FileInputStream fis = new FileInputStream("mor.data");
 //            ObjectInputStream ois = new ObjectInputStream(fis);
-//            dash = (Dashboard) ois.readObject();
+//            dash = (AdminDash) ois.readObject();
 //            ois.close();
 //        }catch(IOException | ClassNotFoundException e){
 //            Misc.display(e.getLocalizedMessage(), 2);

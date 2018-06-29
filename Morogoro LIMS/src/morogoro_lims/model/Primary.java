@@ -4,12 +4,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Primary extends Member{
-    private final StringProperty parentFirstName;
-    private final StringProperty parentMiddleName;
-    private final StringProperty parentLastName;
-    private final StringProperty schoolName;
-    private final StringProperty schoolAddr;
-    private final StringProperty grade;
+    private StringProperty parentFirstName;
+    private StringProperty parentMiddleName;
+    private StringProperty parentLastName;
+    private StringProperty schoolName;
+    private StringProperty schoolAddr;
+    private StringProperty grade;
     private byte[] parentPhoto;
 
     public Primary(Long id, String reg, String fName, String mName, String lName, String postal, String phone1, String phone2, 
@@ -26,6 +26,11 @@ public class Primary extends Member{
         this.grade = new SimpleStringProperty(grade);
         this.parentPhoto = parentPhoto;
     }
+    
+    public Primary(Long id, String reg, String receipt, String startDate, String endDate) {
+        super(id, reg, receipt, startDate, endDate);
+    }
+    
     public Primary(Long id, String fName, String mName, String lName, String postal, String phone1, String phone2, 
             String idType, String idNumber, String street, String region, String parentFirstName, 
             String parentMiddleName, String parentLastName, String schoolName, String schoolAddr, String grade) {

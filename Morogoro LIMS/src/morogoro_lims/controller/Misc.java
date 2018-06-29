@@ -1,7 +1,11 @@
 package morogoro_lims.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -36,9 +40,30 @@ public class Misc {
         }
     }
     
-    public static String today(){
+    public static String todayNow(){
         SimpleDateFormat sdf = new SimpleDateFormat("Y-M-d H:m:s");
         Date date = new Date();
         return sdf.format(date);
+    }
+    public static String today(){
+        SimpleDateFormat sdf = new SimpleDateFormat("Y-MM-dd");
+        Date date = new Date();
+        return sdf.format(date);
+    }
+    public static ObservableList<String> getEndDates(){
+        ObservableList<String> dates = FXCollections.observableArrayList();
+        SimpleDateFormat sdf = new SimpleDateFormat("Y-MM-dd");
+        Date today = new Date();
+        for(int i = 1; i < 10; i++){
+            Date date = Misc.addYear(today, i);            
+            dates.add(sdf.format(date));
+        }
+        return dates;
+    }
+    public static Date addYear(Date date, int y){
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.setTime(date);
+        gc.add(Calendar.YEAR, y);
+        return gc.getTime();
     }
 }

@@ -12,13 +12,13 @@ public class Update {
         /**
          * Removing column that holds NULL value or Blank value
          */
-        if(!colsAndData.isEmpty()){
+        /*if(!colsAndData.isEmpty()){
             for(Map.Entry<String, String> entry : colsAndData.entrySet()){
                 if(entry.getValue() == null || entry.getValue().isEmpty()){
                     colsAndData.remove(entry.getKey());
                 }
             }
-        }
+        }*/
         
         /**
          * Removing column that holds NULL value or Blank value..
@@ -59,14 +59,24 @@ public class Update {
     }
     
     public static void main(String[] args){
-        Map<String, String> myMap = new HashMap<>();
-        myMap.put("title","java");
-        myMap.put("author", "james gosling");
-        myMap.put("category", "programming");
+        Map<String, String> libColsData = new HashMap<>();
+        libColsData.put("reg_number", "?");
+        libColsData.put("firstname", "?");
+        libColsData.put("middlename", "?");
+        libColsData.put("lastname", "?");
+        libColsData.put("department", "?");
+        libColsData.put("postal_addr", "?");
+        libColsData.put("phone1", "?");
+        libColsData.put("phone2", "?");
+        libColsData.put("street", "?");
+        libColsData.put("region", "?");
+        libColsData.put("password", "?");
+        libColsData.put("status", "?");
+        libColsData.put("photo", "?");
+
+        Map<String, String> libCond = new HashMap<>();
+        libCond.put("librarian.reg_number", "?");
         
-        Map<String, String> cond = new HashMap<>();
-        cond.put("id", "1");
-        
-        System.out.println(sql("book", myMap, cond));
+        System.out.println(sql("book", libColsData, libCond));
     }
 }

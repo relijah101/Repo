@@ -131,7 +131,7 @@ public class AddBook implements Initializable{
         }
         Category cate = new Category(catId, cat, "");
         Publisher publ = new Publisher(pubId, pub);
-        Book book = new Book(number, title, cate, Integer.parseInt(edition), Integer.parseInt(copies), publ, isbn, reference);
+        Book book = new Book(number, title, catId, Integer.parseInt(edition), Integer.parseInt(copies), pubId, isbn, reference);
         if(query.insert(book, Query.BOOK_TABLE)) reset();
     }
 }
