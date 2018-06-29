@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane stylesheets="@../Styles/Default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="morogoro_lims.controller.technical.CategoryTable">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="415.0" prefWidth="630.0" spacing="3.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="ORODHA YA KATEGORI">
+               <VBox.margin>
+                  <Insets bottom="8.0" top="5.0" />
+               </VBox.margin>
+            </Text>
+            <HBox>
+               <children>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@../Image/search-icon.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="searchCategory" onKeyTyped="#onSearchCategory" promptText="Tafuta kategori" styleClass="textfield" HBox.hgrow="ALWAYS">
+                     <tooltip>
+                        <Tooltip text="Tafuta kategori kwa jina au namba" />
+                     </tooltip></TextField>
+               </children>
+            </HBox>
+            <TableView fx:id="categoryTable" VBox.vgrow="ALWAYS">
+              <columns>
+                <TableColumn fx:id="numberCol" prefWidth="140.0" text="Namba" />
+                  <TableColumn fx:id="categoryCol" prefWidth="75.0" text="Kategori" />
+                  <TableColumn fx:id="descriptionCol" prefWidth="75.0" text="Maelezo" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#onUpdateCategory" text="Badili taarifa za kategori" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#onRemoveCategory" text="Ondoa taarifa za kategori" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</AnchorPane>
