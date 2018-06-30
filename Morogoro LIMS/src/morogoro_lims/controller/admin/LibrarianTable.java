@@ -2,7 +2,9 @@ package morogoro_lims.controller.admin;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -10,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -23,7 +26,7 @@ import morogoro_lims.model.query.Query;
 
 public class LibrarianTable implements Initializable{
     private final Query<Librarian> query = new Query();   
-    ObservableList<Librarian> librarianList;
+    ObservableList<Librarian> librarianList = FXCollections.observableArrayList();
     @FXML private TableView<Librarian> librarianTable;
     @FXML private TableColumn<Librarian, String> fNameCol, mNameCol, lNameCol, depCol, phone1Col, phone2Col, addrCol, streetCol;
     @FXML private TextField searchLibrarian;
@@ -31,10 +34,12 @@ public class LibrarianTable implements Initializable{
     private Long libId;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        librarianTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         initTable();
         initCols();
     }
     public void initTable(){
+        librarianList.clear();
         librarianList = query.select(Query.LIBRARIAN_TABLE, 1);
         if (!librarianList.isEmpty()) {
             librarianTable.setItems(librarianList);
@@ -52,7 +57,7 @@ public class LibrarianTable implements Initializable{
         phone2Col.setCellValueFactory(new PropertyValueFactory<>("phone2"));
         streetCol.setCellValueFactory(new PropertyValueFactory<>("street"));
     }
-     @FXML
+    @FXML
     public void onSearchLibrarian(){
         FilteredList<Librarian> filteredData = new FilteredList<>(librarianList, l->true);
         searchLibrarian.textProperty().addListener((observable, oldValue, newValue)->{
@@ -63,6 +68,7 @@ public class LibrarianTable implements Initializable{
                 if(librarian.getMiddleName().toLowerCase().contains(newValue.toLowerCase())) return true;
                 if(librarian.getLastName().toLowerCase().contains(newValue.toLowerCase())) return true;
                 if(librarian.getDepartment().toLowerCase().contains(newValue.toLowerCase())) return true;
+                if(librarian.getReg().toLowerCase().contains(newValue.toLowerCase())) return true;
                 if(librarian.getStreet().toLowerCase().contains(newValue.toLowerCase())) return true;
                 return false;
             });
@@ -93,6 +99,7 @@ public class LibrarianTable implements Initializable{
             
             Scene scene = new Scene(librarianLoader.getRoot());
             Stage stage = new Stage();
+            Misc.setIcon(stage);
             stage.setTitle("Taarifa za " + lib.getFirstName()+" "+lib.getMiddleName()+" "+lib.getLastName());
             stage.setScene(scene);
             stage.show();            
@@ -106,8 +113,30 @@ public class LibrarianTable implements Initializable{
             if(Query.blockLibrarian(reg, "0")){
                initTable(); 
             }
-            
         }  
     }   
     
+    @FXML
+    public void onResetPassword(){
+        if(librarianTable.getSelectionModel().getSelectedItem() != null){
+            String reg = librarianTable.getSelectionModel().getSelectedItem().getReg();
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < 16; i++){
+                sb.append((char) getRandomNumber());
+            }
+            String generatedResetPwd = sb.toString();
+            
+            String hashedGeneratedResetPwd = Misc.getSHA512Password(generatedResetPwd);
+            if(query.updatePwd(reg, hashedGeneratedResetPwd)){
+                Misc.display("Neno siri jipya ni\n"+generatedResetPwd+"\nAndika mahali neno la siri, na kumbuka kubadilisha", 0);
+            }
+        } 
+    }
+    
+    public static int getRandomNumber(){
+        int min = 33;
+        int max = 126;
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + 33;
+    }
 }

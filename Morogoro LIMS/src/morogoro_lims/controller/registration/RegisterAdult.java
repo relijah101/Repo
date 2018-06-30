@@ -79,10 +79,10 @@ public class RegisterAdult implements Initializable{
         searchAdult.textProperty().addListener((observable, oldValue, newValue)->{
             filteredData.setPredicate(ad->{
                 if(newValue == null || newValue.isEmpty()) return true;
-                if(ad.getStreet().toLowerCase().equals(newValue.toLowerCase())) return true;
-                if(ad.getFirstName().toLowerCase().equals(newValue.toLowerCase())) return true;
-                if(ad.getMiddleName().toLowerCase().equals(newValue.toLowerCase())) return true;
-                if(ad.getLastName().toLowerCase().equals(newValue.toLowerCase())) return true;
+                if(ad.getStreet().toLowerCase().contains(newValue.toLowerCase())) return true;
+                if(ad.getFirstName().toLowerCase().contains(newValue.toLowerCase())) return true;
+                if(ad.getMiddleName().toLowerCase().contains(newValue.toLowerCase())) return true;
+                if(ad.getLastName().toLowerCase().contains(newValue.toLowerCase())) return true;
                 return false;
             });
         });

@@ -10,9 +10,9 @@ public class Secondary extends Member{
 
     public Secondary(Long id, String reg, String fName, String mName, String lName, String postal, String phone1, String phone2, 
             String idType, String idNumber, String street, String region, String status, String grade, String school, 
-            String schoolAddr, String receipt, String startDate, String endDate, byte[] photo) {
+            String schoolAddr, String receipt, String startDate, String endDate, String libId, String libName, byte[] photo) {
         super(id, reg, fName, mName, lName, postal, phone1, phone2, idType, idNumber, street, region, status, receipt, startDate,
-                endDate, photo);
+                endDate, libId, libName, photo);
         this.grade = new SimpleStringProperty(grade);
         this.school = new SimpleStringProperty(school);
         this.schoolAddr = new SimpleStringProperty(schoolAddr);

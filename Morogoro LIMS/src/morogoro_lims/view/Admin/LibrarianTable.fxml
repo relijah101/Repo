@@ -27,7 +27,7 @@
                         <Image url="@../Image/search-icon.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="searchLibrarian" onKeyReleased="#onSearchLibrarian" promptText="Tafuta mkutubi" styleClass="textfield" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="searchLibrarian" onKeyTyped="#onSearchLibrarian" promptText="Tafuta mkutubi" styleClass="textfield" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <TableView fx:id="librarianTable" onMouseClicked="#onLibClicked" VBox.vgrow="ALWAYS">
@@ -48,6 +48,7 @@
                   <ContextMenu>
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#onViewLibrarian" text=" Ona zaidi" />
+                        <MenuItem mnemonicParsing="false" onAction="#onResetPassword" text="Badili neno siri" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#onBlockLibrarian" text="Sitisha mkutubi" />
                     </items>

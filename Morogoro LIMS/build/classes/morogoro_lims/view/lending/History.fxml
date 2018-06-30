@@ -1,6 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" />
+<AnchorPane stylesheets="@../Styles/Default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="morogoro_lims.controller.lending.History">
+   <children>
+      <TabPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Uazimishaji">
+            <content>
+              <AnchorPane>
+                     <children>
+                        <VBox spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <TextField fx:id="searchLendingFld" onKeyTyped="#onSearchLending" promptText="Tafuta rekodi" styleClass="textfield" />
+                              <TableView fx:id="lendingHistoryTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                <columns>
+                                  <TableColumn fx:id="lendIdCol" prefWidth="75.0" text="Namba" />
+                                  <TableColumn fx:id="lMemberRegCol" prefWidth="75.0" text="Namba ya mwanachama" />
+                                    <TableColumn fx:id="lMemberNameCol" prefWidth="75.0" text="Jina la mwanachama" />
+                                    <TableColumn fx:id="lBookNumberCol" prefWidth="75.0" text="Namba ya kitabu" />
+                                    <TableColumn fx:id="lBookTitleCol" prefWidth="75.0" text="Jina la kitabu" />
+                                    <TableColumn fx:id="lLendDateCol" prefWidth="75.0" text="Tarehe ya kuazimwa" />
+                                    <TableColumn fx:id="lReturnDateCol" prefWidth="75.0" text="Tarehe ya kurudisha" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Urudishwaji">
+            <content>
+              <AnchorPane>
+                     <children>
+                        <VBox spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <TextField fx:id="searchReturningFld" onKeyTyped="#onSearchReturning" promptText="Tafuta rekodi" styleClass="textfield" />
+                              <TableView fx:id="returningHistoryTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <columns>
+                                    <TableColumn fx:id="rLendIdCol" prefWidth="75.0" text="Namba ya kuazima" />
+                                    <TableColumn fx:id="rMemberRegCol" prefWidth="75.0" text="Namba ya mwanachama" />
+                                    <TableColumn fx:id="rMemberNameCol" prefWidth="75.0" text="Jina la mwanachama" />
+                                    <TableColumn fx:id="rBookNumberCol" prefWidth="75.0" text="Namba ya kitabu" />
+                                    <TableColumn fx:id="rBookTitleCol" prefWidth="75.0" text="Jina la kitabu" />
+                                    <TableColumn fx:id="rReturnDateCol" prefWidth="75.0" text="Tarehe ya kurudishwa" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+   <padding>
+      <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+   </padding>
+</AnchorPane>

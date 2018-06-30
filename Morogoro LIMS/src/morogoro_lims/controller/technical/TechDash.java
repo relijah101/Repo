@@ -11,15 +11,11 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import morogoro_lims.controller.Misc;
@@ -66,26 +62,6 @@ public class TechDash implements Initializable{
     
     //MAINMENU
     @FXML
-    public void onFind(){
-        TextField searchMenu = new TextField();
-        searchMenu.setPrefWidth(300);
-        VBox menuBox = new VBox(5);
-        
-        
-        Dialog dialog = new Dialog();
-        dialog.setTitle("Tafuta.");
-        dialog.setHeaderText("Tafuta menu.");
-        dialog.setGraphic(menuBox);
-      
-        menuBox.getChildren().addAll(searchMenu);
-        dialog.show();
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
-    }
-    @FXML
-    public void onViewShortcuts(){
-        getPane("/morogoro_lims/view/Shortcuts.fxml");
-    }
-    @FXML
     public void onChangePassword(){
         getPane("/morogoro_lims/view/Technical/ChangePassword.fxml");
     }
@@ -97,7 +73,22 @@ public class TechDash implements Initializable{
             main_dash.setLeft(menuAccordion);
         }
     }
-    
+    @FXML
+    public void about(){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/morogoro_lims/view/About.fxml"));
+        try{
+            loader.load();
+        }catch(IOException ioe){
+            Misc.display(ioe.getLocalizedMessage(), 2);
+        }
+        Stage stage = new Stage();
+        Misc.setIcon(stage);
+        stage.setResizable(false);
+        stage.setTitle("TLSB: Morogoro Regional Library");
+        stage.setScene(new Scene(loader.getRoot()));
+        stage.show();
+    }
     //Technical
     @FXML
     public void onRecordBook(){
@@ -148,22 +139,6 @@ public class TechDash implements Initializable{
         }else{
             leftPaneCheckBox.setSelected(true);
         }
-    }
-    //Themes
-    @FXML
-    public void onDefault(){
-        redenCheckBox.setSelected(false);
-        darkenCheckBox.setSelected(false);
-    }    
-    @FXML
-    public void onReden(){
-        defaultCheckBox.setSelected(false);
-        darkenCheckBox.setSelected(false);
-    }
-    @FXML
-    public void onDarken(){
-        defaultCheckBox.setSelected(false);
-        darkenCheckBox.setSelected(false);
     }
     
     //Logout and Exit

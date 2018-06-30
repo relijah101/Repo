@@ -49,7 +49,8 @@ public class Login implements Initializable{
     @FXML
     private void onLoggingIn(MouseEvent event){        
         String name = usernameFld.getText();
-        String pass = passwordFld.getText();
+        //String pass = passwordFld.getText();
+        String pass = Misc.getSHA512Password(passwordFld.getText());
         
         user = query.login(name, pass);
         if(user == null){
@@ -144,6 +145,7 @@ public class Login implements Initializable{
     public void open(MouseEvent event){       
         Parent parent = loader.getRoot();
         Stage stage = new Stage();
+        Misc.setIcon(stage);
         stage.setTitle("Mfumo wa Kumeneji Taarifa za Maktaba Ya Mkoa wa Morogoro.");
         stage.setScene(new Scene(parent));
         stage.show();

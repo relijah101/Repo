@@ -12,9 +12,10 @@ public class Adult extends Member{
 
     public Adult(Long id, String reg, String fName, String mName, String lName, String postal, String houseNumber, String phone1, 
             String phone2, String idType, String idNumber, String street, String region, String status, 
-            String receipt, String startDate, String endDate, byte[] photo, String office, String sponsor, String title, String reference) {
+            String receipt, String startDate, String endDate, String libId, 
+            String libName, byte[] photo, String office, String sponsor, String title, String reference) {
         super(id, reg, fName, mName, lName, postal, phone1, phone2, idType, idNumber, street, region, status, receipt, 
-                startDate, endDate, photo);
+                startDate, endDate, libId, libName, photo);
         this.houseNumber = new SimpleStringProperty(houseNumber);
         this.office = new SimpleStringProperty(office);
         this.sponsor = new SimpleStringProperty(sponsor);

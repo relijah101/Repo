@@ -11,15 +11,12 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import morogoro_lims.controller.Misc;
@@ -29,15 +26,26 @@ import morogoro_lims.model.query.Query;
 public class AdminDash implements Initializable{
     @FXML BorderPane main_dash;
     @FXML transient CheckMenuItem defaultCheckBox, redenCheckBox, darkenCheckBox, leftPaneCheckBox;
+    @FXML MenuItem viewRegisteredAdultMenuItem, viewRegisteredPrimaryMenuItem, viewRegisteredSecondaryMenuItem;
     @FXML transient Accordion menuAccordion;
     @FXML private Label usernameLbl;
    
     private transient static User user;
     public AdminDash(){}
     @Override
+    //Initial method
     public void initialize(URL location, ResourceBundle resources) {
-        
+        viewRegisteredAdultMenuItem.setOnAction(e ->{
+            getPane("/morogoro_lims/view/registration/ViewRegisteredAdult.fxml");
+        }); 
+        viewRegisteredPrimaryMenuItem.setOnAction(e ->{
+            getPane("/morogoro_lims/view/registration/ViewRegisteredPrimary.fxml");
+        }); 
+        viewRegisteredSecondaryMenuItem.setOnAction(e ->{
+            getPane("/morogoro_lims/view/registration/ViewRegisteredSecondary.fxml");
+        }); 
     }
+    //Check if the center is enabled the disable and vice versa
     public void enablePane(){
         if(main_dash.isDisabled())
             main_dash.setDisable(false);
@@ -45,13 +53,17 @@ public class AdminDash implements Initializable{
             main_dash.setDisable(true);
         
     }
+    //Initialize the user information during login
     public void initUser(User user){
         AdminDash.user = user;
         usernameLbl.setText(user.getUsername());
     }
+    
+    //Get information of the user that has logged in
     public static User getUser(){
         return user;
     }
+    //Initialize the right pane of the main border pane
     public void initRight(String location){        
         try{
             AnchorPane pane = FXMLLoader.load(getClass().getResource(location));
@@ -67,6 +79,7 @@ public class AdminDash implements Initializable{
     public void resetCenter(){
         main_dash.setCenter(null);
     }
+    //Get center of the borderpane and set a certain pane
     public void getPane(String location){
         try{
             AnchorPane pane = FXMLLoader.load(getClass().getResource(location));
@@ -75,27 +88,8 @@ public class AdminDash implements Initializable{
             Misc.display(ioe.getLocalizedMessage(), 2);
         }
     }
-    @FXML
-    public void onFind(){
-        TextField searchMenu = new TextField();
-        searchMenu.setPrefWidth(300);
-        VBox menuBox = new VBox(5);
-        
-        
-        Dialog dialog = new Dialog();
-        dialog.setTitle("Tafuta.");
-        dialog.setHeaderText("Tafuta menu.");
-        dialog.setGraphic(menuBox);
-      
-        menuBox.getChildren().addAll(searchMenu);
-        dialog.show();
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
-        //dialog.close();
-    }
-    @FXML
-    public void onViewShortcuts(){
-        getPane("/morogoro_lims/view/Shortcuts.fxml");
-    }
+    
+    //Change your password
     @FXML
     public void onChangePassword(){
         getPane("/morogoro_lims/view/Admin/ChangePassword.fxml");
@@ -108,7 +102,30 @@ public class AdminDash implements Initializable{
             main_dash.setLeft(menuAccordion);
         }
     }
-    //Registration
+    //Management Module
+    @FXML
+    public void onReport(){
+        resetCenter();
+        getPane("/morogoro_lims/view/management/Report.fxml");
+    }
+    
+    @FXML
+    public void about(){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/morogoro_lims/view/About.fxml"));
+        try{
+            loader.load();
+        }catch(IOException ioe){
+            Misc.display(ioe.getLocalizedMessage(), 2);
+        }
+        Stage stage = new Stage();
+        Misc.setIcon(stage);
+        stage.setResizable(false);
+        stage.setTitle("TLSB: Morogoro Regional Library");
+        stage.setScene(new Scene(loader.getRoot()));
+        stage.show();
+    }
+    //Registration Module
     @FXML
     public void onRegisterAdult(){
         resetRight();
@@ -122,7 +139,7 @@ public class AdminDash implements Initializable{
         resetRight();
         getPane("/morogoro_lims/view/registration/RegisterSecondary.fxml");
     }
-    //Technical
+    //Technical Module
     @FXML
     public void onRecordBook(){
         resetRight();
@@ -173,20 +190,23 @@ public class AdminDash implements Initializable{
         resetRight();
         getPane("/morogoro_lims/view/Technical/AuthorWithBooks.fxml");
     }
-    //Lending
+    //Lending Module
     @FXML
     public void onIssueBook(){
         resetRight();
         getPane("/morogoro_lims/view/lending/IssueBook.fxml");
-    }
-    
+    }    
     @FXML
     public void onReturnBook(){
         resetRight();
-        getPane("/morogoro_lims/view/Technical/PublisherTable.fxml");
+        getPane("/morogoro_lims/view/lending/ReturnBook.fxml");
     }
-    
-    //Administration
+    @FXML
+    public void onHistory(){
+        resetRight();
+        getPane("/morogoro_lims/view/lending/History.fxml");
+    }
+    //Administration Module
     @FXML
     public void onAddLibrarian(){
         resetRight();
@@ -217,7 +237,7 @@ public class AdminDash implements Initializable{
         resetRight();
         getPane("/morogoro_lims/view/Admin/Settings.fxml");
     }
-    //Left pane
+    //Remove or Set the left main menu
     @FXML
     public void onLeftPane(){
         if(leftPaneCheckBox.isSelected()){
@@ -226,24 +246,8 @@ public class AdminDash implements Initializable{
             leftPaneCheckBox.setSelected(true);
         }
     }
-    //Themes
-    @FXML
-    public void onDefault(){
-        redenCheckBox.setSelected(false);
-        darkenCheckBox.setSelected(false);
-    }    
-    @FXML
-    public void onReden(){
-        defaultCheckBox.setSelected(false);
-        darkenCheckBox.setSelected(false);
-    }
-    @FXML
-    public void onDarken(){
-        defaultCheckBox.setSelected(false);
-        darkenCheckBox.setSelected(false);
-    }
     
-    //Logout and Exit
+    //Logout and Exit Module
     @FXML
     public void onLogout(MouseEvent event){
         FXMLLoader loader = new FXMLLoader();

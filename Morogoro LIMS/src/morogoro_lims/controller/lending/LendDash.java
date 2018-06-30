@@ -48,7 +48,7 @@ public class LendDash implements Initializable{
     }
     public void initUser(User user){
         LendDash.user = user;
-        usernameLbl.setText(user.getUsername());
+        usernameLbl.setText(LendDash.getUser().getUsername());
     }
     public static User getUser(){
         return user;
@@ -64,31 +64,7 @@ public class LendDash implements Initializable{
             Misc.display(ioe.getLocalizedMessage(), 2);
         }
     }
-    @FXML
-    public void onFind(){
-        TextField searchMenu = new TextField();
-        searchMenu.setPrefWidth(300);
-        VBox menuBox = new VBox(5);
-        
-        
-        Dialog dialog = new Dialog();
-        dialog.setTitle("Tafuta.");
-        dialog.setHeaderText("Tafuta menu.");
-        dialog.setGraphic(menuBox);
-      
-        menuBox.getChildren().addAll(searchMenu);
-        dialog.show();
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
-        //dialog.close();
-    }
-    @FXML
-    public void onViewShortcuts(){
-        getPane("/morogoro_lims/view/Shortcuts.fxml");
-    }
-    @FXML
-    public void onChangePassword(){
-        getPane("/morogoro_lims/view/ChangePassword.fxml");
-    }
+    
     @FXML
     public void onLeftMenu(){
         if(main_dash.getLeft() != null){
@@ -96,8 +72,27 @@ public class LendDash implements Initializable{
         }else{
             main_dash.setLeft(menuAccordion);
         }
-    }    
-    
+    }   
+    @FXML
+    public void onChangePassword(){
+        getPane("/morogoro_lims/view/lending/ChangePassword.fxml");
+    }
+    @FXML
+    public void about(){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/morogoro_lims/view/About.fxml"));
+        try{
+            loader.load();
+        }catch(IOException ioe){
+            Misc.display(ioe.getLocalizedMessage(), 2);
+        }
+        Stage stage = new Stage();
+        Misc.setIcon(stage);
+        stage.setResizable(false);
+        stage.setTitle("TLSB: Morogoro Regional Library");
+        stage.setScene(new Scene(loader.getRoot()));
+        stage.show();
+    }
     //Lending
     @FXML
     public void onIssueBook(){
@@ -106,7 +101,11 @@ public class LendDash implements Initializable{
     
     @FXML
     public void onReturnBook(){
-        getPane("/morogoro_lims/view/Technical/PublisherTable.fxml");
+        getPane("/morogoro_lims/view/lending/ReturnBook.fxml");
+    }
+    @FXML
+    public void onHistory(){
+        getPane("/morogoro_lims/view/lending/History.fxml");
     }
     
      //Left pane
@@ -117,22 +116,6 @@ public class LendDash implements Initializable{
         }else{
             leftPaneCheckBox.setSelected(true);
         }
-    }
-    //Themes
-    @FXML
-    public void onDefault(){
-        redenCheckBox.setSelected(false);
-        darkenCheckBox.setSelected(false);
-    }    
-    @FXML
-    public void onReden(){
-        defaultCheckBox.setSelected(false);
-        darkenCheckBox.setSelected(false);
-    }
-    @FXML
-    public void onDarken(){
-        defaultCheckBox.setSelected(false);
-        darkenCheckBox.setSelected(false);
     }
     
     //Logout and Exit

@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import morogoro_lims.controller.Misc;
 import morogoro_lims.controller.admin.AdminDash;
 
 public class Main extends Application{
@@ -18,6 +19,7 @@ public class Main extends Application{
         stage.setScene(scene);
         
         this.stage = stage;
+        Misc.setIcon(stage);
         stage.setTitle("Mfumo wa Kumeneji Taarifa za Maktaba Ya Mkoa wa Morogoro.");
         stage.show();
     }

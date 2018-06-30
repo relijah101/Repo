@@ -1,5 +1,6 @@
 package morogoro_lims.controller.admin;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
@@ -16,6 +17,7 @@ import morogoro_lims.model.query.Query;
 
 public class Settings implements Initializable{
     @FXML TextField depFld, nameFld, addressFld, regionFld, phoneFld1, phoneFld2, emailFld;
+    @FXML TextField backupFld, restoreFld;
     @FXML ListView<Department> departmentListView;
     @FXML Text nameText, addressText, regionText, phone1Text, phone2Text, emailText;
     
@@ -52,7 +54,7 @@ public class Settings implements Initializable{
         addressFld.setText("");
         regionFld.setText("");
         phoneFld1.setText("");
-        phoneFld1.setText("");
+        phoneFld2.setText("");
         emailFld.setText("");
     }
     @FXML
@@ -137,14 +139,14 @@ public class Settings implements Initializable{
             phoneFld1.requestFocus();
             return;
         }
-        if(false == PatternMatch.email(email)){
+        if(false == PatternMatch.email(email) || false == PatternMatch.web(email)){
             Misc.display("Muundo wa barua pepe si sahihi", 0);
             emailFld.requestFocus();
             return;
         }
         
         Info info = new Info(companyName, phone1, phone2, region, address, email);
-        if(infoSql.insert(info, Query.INFO_TABLE)){
+        if(infoSql.update(info, Query.INFO_TABLE)){
             resetSettings();
             initSettings();
         }
@@ -170,4 +172,32 @@ public class Settings implements Initializable{
             }
         }
     }
+    
+    @FXML
+    public void onBackup(){
+        
+    }
+    @FXML
+    public void onRestore(){
+        
+    }
+    
+//    public void backup(File file){
+//        Process p = null;
+//        String cmd = "mysqldump -uroot -pmysql --add-drop-database -B library_database -r " + file.getAbsolutePath() + " " + file.getName() + ".sql";
+//        try{
+//            Runtime runtime = Runtime.getRuntime();
+//            p = runtime.exec(cmd);
+//            
+//            int processComplete = p.waitFor();
+//            
+//            if(processComplete == 0){
+//                System.out.println("Backup created successfully.");
+//            }else{
+//                System.out.println("Backup not created successfully.");
+//            }
+//        }catch(Exception ex){
+//            ex.printStackTrace();
+//        }
+//    }
 }

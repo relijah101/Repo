@@ -18,6 +18,12 @@
 .clear-btn{
     -fx-background-color: #ccdcdd;
 }
+.print-btn{
+    -fx-background-color: #33cc33;
+}
+.report-btn{
+    -fx-background-color: #3399cc
+}
 .textfield{
     -fx-border-width: 0 0 2 0;
     -fx-background-color: transparent;

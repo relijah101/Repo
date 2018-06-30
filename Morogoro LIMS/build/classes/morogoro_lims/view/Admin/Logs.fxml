@@ -27,7 +27,7 @@
                         <Image url="@../Image/search-icon.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="searchRecord" onKeyReleased="#onSearchRecord" promptText="Tafuta rekodi" styleClass="textfield" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="searchRecord" onKeyTyped="#onSearchRecord" promptText="Tafuta rekodi" styleClass="textfield" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <TableView fx:id="logsTable" onMouseClicked="#onLogsTableClick" prefHeight="401.0" prefWidth="627.0" VBox.vgrow="ALWAYS">

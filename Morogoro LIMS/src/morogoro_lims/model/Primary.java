@@ -7,6 +7,7 @@ public class Primary extends Member{
     private StringProperty parentFirstName;
     private StringProperty parentMiddleName;
     private StringProperty parentLastName;
+    private StringProperty parentFullName;
     private StringProperty schoolName;
     private StringProperty schoolAddr;
     private StringProperty grade;
@@ -15,12 +16,13 @@ public class Primary extends Member{
     public Primary(Long id, String reg, String fName, String mName, String lName, String postal, String phone1, String phone2, 
             String idType, String idNumber, String street, String region, String status,String parentFirstName, 
             String parentMiddleName, String parentLastName, String schoolName, String schoolAddr, String grade, 
-            String receipt, String startDate, String endDate,byte[] parentPhoto, byte[] photo) {
+            String receipt, String startDate, String endDate, byte[] parentPhoto, String libId, String libName, byte[] photo) {
         super(id, reg, fName, mName, lName, postal, phone1, phone2, idType, idNumber, street, region, status, receipt,
-                startDate, endDate, photo);
+                startDate, endDate, libId, libName, photo);
         this.parentFirstName = new SimpleStringProperty(parentFirstName);
         this.parentMiddleName = new SimpleStringProperty(parentMiddleName);
         this.parentLastName = new SimpleStringProperty(parentLastName);
+        this.parentFullName = new SimpleStringProperty(parentFirstName+" "+parentMiddleName+" "+parentLastName);
         this.schoolName = new SimpleStringProperty(schoolName);
         this.schoolAddr = new SimpleStringProperty(schoolAddr);
         this.grade = new SimpleStringProperty(grade);
@@ -38,6 +40,7 @@ public class Primary extends Member{
         this.parentFirstName = new SimpleStringProperty(parentFirstName);
         this.parentMiddleName = new SimpleStringProperty(parentMiddleName);
         this.parentLastName = new SimpleStringProperty(parentLastName);
+        this.parentFullName = new SimpleStringProperty(parentFirstName+" "+parentMiddleName+" "+parentLastName);
         this.schoolName = new SimpleStringProperty(schoolName);
         this.schoolAddr = new SimpleStringProperty(schoolAddr);
         this.grade = new SimpleStringProperty(grade);
@@ -46,6 +49,7 @@ public class Primary extends Member{
     public String getParentFirstName() {return parentFirstName.get();}
     public String getParentMiddleName() {return parentMiddleName.get();}
     public String getParentLastName() {return parentLastName.get();}
+    public String getParentFullName() {return parentFullName.get();}
     public String getSchoolName() {return schoolName.get();}
     public String getSchoolAddr() {return schoolAddr.get();}
     public String getGrade() {return grade.get();}

@@ -79,7 +79,7 @@ public class RegisterPrimary implements Initializable{
         }
     }
     @FXML
-    public void onSearchAdult(){
+    public void onSearchPrimary(){
         FilteredList<Primary> filteredData = new FilteredList<>(primList, f->true);
         searchPrimary.textProperty().addListener((observable, oldValue, newValue)->{
             filteredData.setPredicate(pr->{

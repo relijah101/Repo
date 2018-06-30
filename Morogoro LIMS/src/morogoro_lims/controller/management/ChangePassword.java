@@ -70,11 +70,17 @@ public class ChangePassword implements Initializable{
         //Compare old pwd 
         User user = ManageDash.getUser();
         Query q = new Query();
+        
+        cPwd = Misc.getSHA512Password(cPwd);
         if(!(cPwd.equals(q.getPwd(user.getRegNumber())))){
+            System.out.println(cPwd);
+            System.out.println(q.getPwd(user.getRegNumber()));
             Misc.display("Neno siri la sasa sio sahihi.", 1);
             currentPwdFld.requestFocus();
             return;
         }
+        
+        nPwd = Misc.getSHA512Password(nPwd);
         if(q.updatePwd(user.getRegNumber(), nPwd)){
             reset();
         }

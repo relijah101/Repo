@@ -26,7 +26,13 @@
                         <Font size="17.0" />
                      </font>
                   </Text>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Image/TLSB-Logo.gif" />
+                     </image>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin></ImageView>
                   <HBox alignment="TOP_CENTER">
                      <children>
                         <ImageView pickOnBounds="true" preserveRatio="true">

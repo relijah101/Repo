@@ -6,11 +6,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Member {
-    private final LongProperty id;
+    private LongProperty id;
     private StringProperty regNumber;
     private StringProperty firstName;
     private StringProperty middleName;
     private StringProperty lastName;
+    private StringProperty fullName;
     private StringProperty postal;
     private StringProperty phone1;
     private StringProperty phone2;
@@ -26,6 +27,14 @@ public class Member {
     private StringProperty libName;
     private byte[] photo;
 
+    public Member(String reg, String fname, String mname, String lname){
+        this.regNumber = new SimpleStringProperty(reg);
+        this.firstName = new SimpleStringProperty(fname);
+        this.middleName = new SimpleStringProperty(mname);
+        this.lastName = new SimpleStringProperty(lname);   
+        this.fullName = new SimpleStringProperty(fname+" "+mname+" "+lname);
+    }
+    
     public Member(Long id, String reg, String firstName, String middleName, String lastName, String postal, String phone1, String phone2, 
             String idType, String idNumber, String street, String region, String status, String receipt, String startDate, 
             String endDate, byte[] photo) {
@@ -34,6 +43,7 @@ public class Member {
         this.firstName = new SimpleStringProperty(firstName);
         this.middleName = new SimpleStringProperty(middleName);
         this.lastName = new SimpleStringProperty(lastName);
+        this.fullName = new SimpleStringProperty(firstName+" "+middleName+" "+lastName);
         this.postal = new SimpleStringProperty(postal);
         this.phone1 = new SimpleStringProperty(phone1);
         this.phone2 = new SimpleStringProperty(phone2);
@@ -56,12 +66,13 @@ public class Member {
     }
     public Member(Long id, String reg, String firstName, String middleName, String lastName, String postal, String phone1, String phone2, 
             String idType, String idNumber, String street, String region, String status, String receipt, String startDate, 
-            String endDate, String libId, String libFname, String libMname, String libLname, byte[] photo) {
+            String endDate, String libId, String libFname, byte[] photo) {
         this.id = new SimpleLongProperty(id);
         this.regNumber = new SimpleStringProperty(reg);
         this.firstName = new SimpleStringProperty(firstName);
         this.middleName = new SimpleStringProperty(middleName);
         this.lastName = new SimpleStringProperty(lastName);
+        this.fullName = new SimpleStringProperty(firstName+" "+middleName+" "+lastName);
         this.postal = new SimpleStringProperty(postal);
         this.phone1 = new SimpleStringProperty(phone1);
         this.phone2 = new SimpleStringProperty(phone2);
@@ -74,7 +85,7 @@ public class Member {
         this.startDate = new SimpleStringProperty(startDate);
         this.endDate = new SimpleStringProperty(endDate);
         this.libId = new SimpleStringProperty(libId);
-        this.libName = new SimpleStringProperty(libFname+" "+libMname+" "+libLname);
+        this.libName = new SimpleStringProperty(libFname);
         this.photo = photo;
     }
      public Member(Long id, String firstName, String middleName, String lastName, String postal, String phone1, String phone2, 
@@ -83,6 +94,7 @@ public class Member {
         this.firstName = new SimpleStringProperty(firstName);
         this.middleName = new SimpleStringProperty(middleName);
         this.lastName = new SimpleStringProperty(lastName);
+        this.fullName = new SimpleStringProperty(firstName+" "+middleName+" "+lastName);
         this.postal = new SimpleStringProperty(postal);
         this.phone1 = new SimpleStringProperty(phone1);
         this.phone2 = new SimpleStringProperty(phone2);
@@ -97,6 +109,7 @@ public class Member {
     public String getFirstName() {return firstName.get();}
     public String getMiddleName() {return middleName.get();}
     public String getLastName() {return lastName.get();}
+    public String getFullName() {return fullName.get();}
     public String getPostal() {return postal.get();}
     public String getPhone1() {return phone1.get();}
     public String getPhone2() {return phone2.get();}
@@ -108,6 +121,7 @@ public class Member {
     public String getReceipt() {return receipt.get();}
     public String getStartDate() {return startDate.get();}
     public String getEndDate() {return endDate.get();}
+    public String getLibName() {return libName.get();}
     public byte[] getPhoto() {return photo;}
     //Property Getters
     public LongProperty getIdProperty() {return id;}

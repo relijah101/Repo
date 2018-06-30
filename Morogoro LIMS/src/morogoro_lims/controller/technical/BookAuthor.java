@@ -13,22 +13,27 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import morogoro_lims.model.Author;
 import morogoro_lims.model.Book;
 import morogoro_lims.model.query.Query;
 
 public class BookAuthor implements Initializable{
     @FXML TableView<Book> bookAuthorsTable;
-    @FXML TableColumn<Book, String> titleCol, authorCol;
+    @FXML TableColumn<Book, String> titleCol;
+    @FXML TableColumn<Book, ObservableList<ObservableList<Author>>> authorCol;
     @FXML TextField searchFld;
-    private final Query<Book> query=new Query<>();
+    private final Query query=new Query<>();
+    
     private Long bookId;
-    ObservableList<Book> bookList=query.select(Query.BOOK_AUTHOR_TABLE, 1);
+    ObservableList<Book> bookList = query.getBookAuthor(query.select(Query.BOOK_TABLE, 1), 1);
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initTable();  
         initCols();
     }
     public void initTable(){
+        bookList.clear();
         if(bookList.isEmpty()){
           bookAuthorsTable.setPlaceholder(new StackPane(new Text("Hakuna rekodi ya kitabu.")));
         }else{
@@ -37,8 +42,8 @@ public class BookAuthor implements Initializable{
         
     }
     public void initCols(){
-        titleCol.setCellValueFactory(new PropertyValueFactory<>(""));
-        authorCol.setCellValueFactory(new PropertyValueFactory<>(""));
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        authorCol.setCellValueFactory(new PropertyValueFactory<>("bookAuthors"));
     }
     @FXML
     public void onSearching(){

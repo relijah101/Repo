@@ -180,6 +180,7 @@ public class RegisterLibrarian implements Initializable{
             passwordFld.requestFocus();
             return;
         }
+        pwd = Misc.getSHA512Password(pwd);
         Department depart = new Department(Long.parseLong(department.split("/ ")[0]),department.split("/ ")[1]);
         Librarian librarian = new Librarian(regNumber, fname, mname, lname, depart, address, phone1, phone2, pwd, street, "Morogoro", 1, photo);
         boolean val = query.insert(librarian, Query.LIBRARIAN_TABLE);

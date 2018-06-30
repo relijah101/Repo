@@ -10,10 +10,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import morogoro_lims.model.User;
 import morogoro_lims.model.query.Query;
 
@@ -72,11 +70,15 @@ public class ChangePassword implements Initializable{
         //Compare old pwd 
         User user = AdminDash.getUser();
         Query q = new Query();
-        if(!(cPwd.equals(q.getPwd(user.getRegNumber())))){
+        
+        cPwd = Misc.getSHA512Password(cPwd);
+        if(!(cPwd.equals(q.getPwd(user.getRegNumber())))){            
             Misc.display("Neno siri la sasa sio sahihi.", 1);
             currentPwdFld.requestFocus();
             return;
         }
+        
+        nPwd = Misc.getSHA512Password(nPwd);
         if(q.updatePwd(user.getRegNumber(), nPwd)){
             reset();
         }

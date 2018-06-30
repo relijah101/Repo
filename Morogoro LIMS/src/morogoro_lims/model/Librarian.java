@@ -14,6 +14,7 @@ public class Librarian{
     private final StringProperty firstName;
     private final StringProperty middleName;
     private final StringProperty lastName;
+    private StringProperty fullName;
     private final StringProperty department;
     private final StringProperty postalAddr;
     private final StringProperty phone1;
@@ -31,6 +32,7 @@ public class Librarian{
         this.firstName = new SimpleStringProperty(fName);
         this.middleName = new SimpleStringProperty(mName);
         this.lastName = new SimpleStringProperty(lName);
+        this.fullName = new SimpleStringProperty(fName+" "+mName+" "+lName);
         this.department = new SimpleStringProperty(dep.getName());
         this.postalAddr = new SimpleStringProperty(postal);
         this.phone1 = new SimpleStringProperty(phone1);
@@ -47,6 +49,7 @@ public class Librarian{
         this.firstName = new SimpleStringProperty(fName);
         this.middleName = new SimpleStringProperty(mName);
         this.lastName = new SimpleStringProperty(lName);
+        this.fullName = new SimpleStringProperty(fName+" "+mName+" "+lName);
         this.department = new SimpleStringProperty(dep.getName());
         this.postalAddr = new SimpleStringProperty(postal);
         this.phone1 = new SimpleStringProperty(phone1);
@@ -64,6 +67,7 @@ public class Librarian{
     public String getFirstName() {return firstName.get();}
     public String getMiddleName() {return middleName.get();}
     public String getLastName() {return lastName.get();}
+    public String getFullName() {return fullName.get();}
     public Long getDepId(){return dep.getId();}
     public String getDepartment() {return department.get();}
     public String getPostalAddr() {return postalAddr.get();}

@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import morogoro_lims.controller.Misc;
-import morogoro_lims.model.Primary;
 import morogoro_lims.model.Secondary;
 import morogoro_lims.model.query.Query;
 
@@ -81,7 +80,7 @@ public class RegisterSecondary implements Initializable{
         }
     }
     @FXML
-    public void onSearchAdult(){
+    public void onSearchSec(){
         FilteredList<Secondary> filteredData = new FilteredList<>(secList, f->true);
         searchSecondary.textProperty().addListener((observable, oldValue, newValue)->{
             filteredData.setPredicate(sec->{

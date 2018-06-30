@@ -6,15 +6,18 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../Styles/Default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="morogoro_lims.controller.technical.BookAuthor">
+<AnchorPane stylesheets="@../Styles/Default.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="morogoro_lims.controller.technical.BookAuthor">
    <children>
-      <VBox layoutX="171.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" spacing="4.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="171.0" layoutY="14.0" spacing="4.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField fx:id="searchFld" onKeyReleased="#onSearching" styleClass="textfield" />
+            <TextField fx:id="searchFld" onKeyReleased="#onSearching" promptText="Tafuta" styleClass="textfield">
+               <tooltip>
+                  <Tooltip text="Tafuta kitabu au mwandishi" />
+               </tooltip></TextField>
             <TableView fx:id="bookAuthorsTable" onMouseClicked="#onTableClicked" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
               <columns>
                 <TableColumn fx:id="titleCol" prefWidth="75.0" text="Jina la kitabu" />

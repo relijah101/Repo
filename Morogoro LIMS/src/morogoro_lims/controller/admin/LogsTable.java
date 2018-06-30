@@ -83,10 +83,10 @@ public class LogsTable implements Initializable{
             filteredList.setPredicate(log -> {
                 if(newValue == null || newValue.isEmpty()) return true;
                 
-                if(log.getRegNumber().toLowerCase().equals(newValue.toLowerCase())) return true;
-                if(log.getName().toLowerCase().equals(newValue.toLowerCase())) return true;
-                if(log.getDate().toLowerCase().equals(newValue.toLowerCase())) return true;
-                if(log.getInfo().toLowerCase().equals(newValue.toLowerCase())) return true;
+                if(log.getRegNumber().toLowerCase().contains(newValue.toLowerCase())) return true;
+                if(log.getName().toLowerCase().contains(newValue.toLowerCase())) return true;
+                if(log.getDate().toLowerCase().contains(newValue.toLowerCase())) return true;
+                if(log.getInfo().toLowerCase().contains(newValue.toLowerCase())) return true;
                 
                 return false;
             });

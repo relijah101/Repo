@@ -10,7 +10,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.BorderPane?>
@@ -113,12 +112,6 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Muhimu">
                   <items>
-                        <MenuItem mnemonicParsing="false" onAction="#onFind" text="Tafuta">
-                           <accelerator>
-                              <KeyCodeCombination alt="UP" code="SPACE" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                           </accelerator>
-                        </MenuItem>
-                        <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#onChangePassword" text="Badili neno siri">
                            <accelerator>
                               <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
@@ -150,52 +143,21 @@
                               </MenuItem>
                            </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" text="Ongeza muda">
-                           <items>
-                              <MenuItem mnemonicParsing="false" text="Mtu Mzima">
-                                 <accelerator>
-                                    <KeyCodeCombination alt="UP" code="F4" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                                 </accelerator>
-                              </MenuItem>
-                              <MenuItem mnemonicParsing="false" text="Mwanafunzi wa msingi">
-                                 <accelerator>
-                                    <KeyCodeCombination alt="UP" code="F5" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                                 </accelerator>
-                              </MenuItem>
-                              <MenuItem mnemonicParsing="false" text="Mwanafunzi wa sekondari">
-                                 <accelerator>
-                                    <KeyCodeCombination alt="UP" code="F6" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                                 </accelerator>
-                              </MenuItem>
-                           </items>
-                        </Menu>
                         <Menu mnemonicParsing="false" text="Ona">
                            <items>
-                              <MenuItem mnemonicParsing="false" text="Mtu Mzima">
+                              <MenuItem fx:id="viewRegisteredAdultMenuItem" mnemonicParsing="false" onAction="#onViewRegisteredAdult" text="Mtu Mzima">
                                  <accelerator>
                                     <KeyCodeCombination alt="UP" code="F7" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                                  </accelerator>
                               </MenuItem>
-                              <MenuItem mnemonicParsing="false" text="Mwanafunzi wa msingi">
+                              <MenuItem fx:id="viewRegisteredPrimaryMenuItem" mnemonicParsing="false" onAction="#onViewRegisteredPrimary" text="Mwanafunzi wa msingi">
                                  <accelerator>
                                     <KeyCodeCombination alt="UP" code="F8" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                                  </accelerator>
                               </MenuItem>
-                              <MenuItem mnemonicParsing="false" text="Mwanafunzi wa sekondari">
+                              <MenuItem fx:id="viewRegisteredSecondaryMenuItem" mnemonicParsing="false" onAction="#onViewRegisteredSecondary" text="Mwanafunzi wa sekondari">
                                  <accelerator>
                                     <KeyCodeCombination alt="UP" code="F9" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                                 </accelerator>
-                              </MenuItem>
-                              <SeparatorMenuItem mnemonicParsing="false" />
-                              <MenuItem mnemonicParsing="false" text="Wote waliosajiliwa">
-                                 <accelerator>
-                                    <KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                                 </accelerator>
-                              </MenuItem>
-                              <SeparatorMenuItem mnemonicParsing="false" />
-                              <MenuItem mnemonicParsing="false" text="Wote waliokwisha muda">
-                                 <accelerator>
-                                    <KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                                  </accelerator>
                               </MenuItem>
                            </items>
@@ -218,16 +180,6 @@
                               <CheckMenuItem fx:id="leftPaneCheckBox" mnemonicParsing="false" onAction="#onLeftMenu" text="Onesha " />
                            </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" text="Muonekano">
-                           <accelerator>
-                              <KeyCodeCombination alt="DOWN" code="F" control="UP" meta="UP" shift="UP" shortcut="UP" />
-                           </accelerator>
-                           <items>
-                              <CheckMenuItem fx:id="defaultCheckBox" mnemonicParsing="false" onAction="#onDefault" text="Default" />
-                              <CheckMenuItem fx:id="redenCheckBox" mnemonicParsing="false" onAction="#onReden" text="Reden" />
-                              <CheckMenuItem fx:id="darkenCheckBox" mnemonicParsing="false" onAction="#onDarken" text="Darken" />
-                           </items>
-                        </Menu>
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Msaada">
@@ -235,9 +187,7 @@
                         <KeyCodeCombination alt="DOWN" code="F" control="UP" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#onViewShortcuts" text="Mikato" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Kuhusu" />
+                        <MenuItem mnemonicParsing="false" onAction="#about" text="Kuhusu" />
                      </items>
                   </Menu>
               </menus>

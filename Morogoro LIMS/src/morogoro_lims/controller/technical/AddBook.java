@@ -17,15 +17,16 @@ import morogoro_lims.model.query.Query;
 
 public class AddBook implements Initializable{
     private final Query<Book> query = new Query();
-    private final Query<String> categoryQuery = new Query();
-    private final Query<String> publisherQuery = new Query();
+    private final Query<Category> categoryQuery = new Query();
+    private final Query<Publisher> publisherQuery = new Query();
     @FXML TextField classNumberFld, titleFld, editionFld, copiesFld, isbnFld;
-    @FXML ComboBox categoryFld, publisherFld;
+    @FXML ComboBox<Category> categoryFld;
+    @FXML ComboBox<Publisher> publisherFld;
     @FXML CheckBox yes, no;
     
-    ObservableList<String> category = categoryQuery.select(Query.CATEGORY_TABLE, 1);
-    ObservableList<String> publisher = publisherQuery.select(Query.PUBLISHER_TABLE, 1);
-    boolean reference;
+    ObservableList<Category> category = categoryQuery.select(Query.CATEGORY_TABLE, 1);
+    ObservableList<Publisher> publisher = publisherQuery.select(Query.PUBLISHER_TABLE, 1);
+    String reference = "0";
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         categoryFld.setItems(category);
@@ -37,8 +38,8 @@ public class AddBook implements Initializable{
         editionFld.setText("");
         copiesFld.setText("");
         isbnFld.setText("");
-        categoryFld.getSelectionModel().select(-1);
-        publisherFld.getSelectionModel().select(-1);
+        categoryFld.getSelectionModel().select(0);
+        publisherFld.getSelectionModel().select(0);
     }
     @FXML
     public void onCancel(){
@@ -46,22 +47,22 @@ public class AddBook implements Initializable{
     }
     @FXML
     public void onYesReference(){
-        reference = true;
+        reference = "1";
         no.setSelected(false);
     }
     @FXML
     public void onNoReference(){
-        reference = false;
+        reference = "0";
         yes.setSelected(false);
     }
             
     @FXML
     public void onSave(){
-        if(categoryFld.getSelectionModel().getSelectedIndex() == -1){
+        if(categoryFld.getSelectionModel().getSelectedItem() == null){
             Misc.display("Hakikisha umekamilisha kujaza fomu", 1);
             return;
         }
-        if(publisherFld.getSelectionModel().getSelectedIndex() == -1){
+        if(publisherFld.getSelectionModel().getSelectedItem() == null){
             Misc.display("Hakikisha umekamilisha kujaza fomu", 1);
             return;
         }
@@ -70,15 +71,7 @@ public class AddBook implements Initializable{
         String edition = editionFld.getText();
         String copies = copiesFld.getText();
         String isbn = isbnFld.getText();
-        
-        String catObj = categoryFld.getSelectionModel().getSelectedItem().toString();
-        Long catId = Long.parseLong(catObj.split("/ ")[0]);
-        String cat = catObj.split("/ ")[1];     
-        
-        String pubObj = publisherFld.getSelectionModel().getSelectedItem().toString();
-        Long pubId = Long.parseLong(pubObj.split("/")[0]);
-        String pub = pubObj.split("/")[1];
-        
+                
         if(number.isEmpty()){
             Misc.display("Hakikisha umejaza namba ya kitabu", 1);
             classNumberFld.requestFocus();
@@ -104,16 +97,6 @@ public class AddBook implements Initializable{
             isbnFld.requestFocus();
             return;
         }
-        if(cat.isEmpty()){
-            Misc.display("Hakikisha umechagua kategori ya kitabu", 1);
-            categoryFld.requestFocus();
-            return;
-        }
-        if(pub.isEmpty()){
-            Misc.display("Hakikisha umechagua mchapishaji wa kitabu", 1);
-            publisherFld.requestFocus();
-            return;
-        }
         if(false == PatternMatch.title(title)){
             Misc.display("Muundo wa jina la kitabu umekosewa. Tafadhali jaribu tena.", 1);
             titleFld.requestFocus();
@@ -129,9 +112,9 @@ public class AddBook implements Initializable{
             copiesFld.requestFocus();
             return; 
         }
-        Category cate = new Category(catId, cat, "");
-        Publisher publ = new Publisher(pubId, pub);
-        Book book = new Book(number, title, catId, Integer.parseInt(edition), Integer.parseInt(copies), pubId, isbn, reference);
+        Category cate = categoryFld.getSelectionModel().getSelectedItem();
+        Publisher publ = publisherFld.getSelectionModel().getSelectedItem();
+        Book book = new Book(number, title, cate, Integer.parseInt(edition), Integer.parseInt(copies), publ, isbn, reference);
         if(query.insert(book, Query.BOOK_TABLE)) reset();
     }
 }

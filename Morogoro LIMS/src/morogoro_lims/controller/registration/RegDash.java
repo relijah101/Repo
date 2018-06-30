@@ -11,15 +11,12 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import morogoro_lims.controller.Misc;
@@ -29,6 +26,7 @@ import morogoro_lims.model.query.Query;
 public class RegDash implements Initializable{
     @FXML BorderPane main_dash;
     @FXML transient CheckMenuItem defaultCheckBox, redenCheckBox, darkenCheckBox, leftPaneCheckBox;
+    @FXML MenuItem viewRegisteredAdultMenuItem, viewRegisteredPrimaryMenuItem, viewRegisteredSecondaryMenuItem;
     @FXML transient Accordion menuAccordion;
     @FXML private Label usernameLbl;
     private transient static User user;
@@ -36,8 +34,17 @@ public class RegDash implements Initializable{
     public RegDash(){}
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+        viewRegisteredAdultMenuItem.setOnAction(e ->{
+            getPane("/morogoro_lims/view/registration/ViewRegisteredAdult.fxml");
+        }); 
+        viewRegisteredPrimaryMenuItem.setOnAction(e ->{
+            getPane("/morogoro_lims/view/registration/ViewRegisteredPrimary.fxml");
+        }); 
+        viewRegisteredSecondaryMenuItem.setOnAction(e ->{
+            getPane("/morogoro_lims/view/registration/ViewRegisteredSecondary.fxml");
+        }); 
     }
+    
     public void enablePane(){
         if(main_dash.isDisabled())
             main_dash.setDisable(false);
@@ -66,31 +73,6 @@ public class RegDash implements Initializable{
     
     //MAINMENU
     @FXML
-    public void onFind(){
-        TextField searchMenu = new TextField();
-        searchMenu.setPrefWidth(300);
-        VBox menuBox = new VBox(5);
-        
-        
-        Dialog dialog = new Dialog();
-        dialog.setTitle("Tafuta.");
-        dialog.setHeaderText("Tafuta menu.");
-        dialog.setGraphic(menuBox);
-      
-        menuBox.getChildren().addAll(searchMenu);
-        dialog.show();
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
-        //dialog.close();
-    }
-    @FXML
-    public void onViewShortcuts(){
-        getPane("/morogoro_lims/view/Shortcuts.fxml");
-    }
-    @FXML
-    public void onChangePassword(){
-        getPane("/morogoro_lims/view/registration/ChangePassword.fxml");
-    }
-    @FXML
     public void onLeftMenu(){
         if(main_dash.getLeft() != null){
             main_dash.setLeft(null);
@@ -98,17 +80,50 @@ public class RegDash implements Initializable{
             main_dash.setLeft(menuAccordion);
         }
     }
-    
+    @FXML
+    public void onChangePassword(){
+        getPane("/morogoro_lims/view/registration/ChangePassword.fxml");
+    }
+    @FXML
+    public void about(){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/morogoro_lims/view/About.fxml"));
+        try{
+            loader.load();
+        }catch(IOException ioe){
+            Misc.display(ioe.getLocalizedMessage(), 2);
+        }
+        Stage stage = new Stage();
+        Misc.setIcon(stage);
+        stage.setResizable(false);
+        stage.setTitle("TLSB: Morogoro Regional Library");
+        stage.setScene(new Scene(loader.getRoot()));
+        stage.show();
+    }
     //Registration
     @FXML
     public void onRegisterAdult(){
         getPane("/morogoro_lims/view/registration/RegisterAdult.fxml");
     }
+    @FXML
     public void onRegisterPrimary(){
         getPane("/morogoro_lims/view/registration/RegisterPrimary.fxml");
     }
+    @FXML
     public void onRegisterSecondary(){
         getPane("/morogoro_lims/view/registration/RegisterSecondary.fxml");
+    }
+    @FXML
+    public void onViewRegisteredAdult(){
+        getPane("/morogoro_lims/view/registration/ViewRegisteredAdult.fxml");
+    }
+    @FXML
+    public void onViewRegisteredPrimary(){
+        getPane("/morogoro_lims/view/registration/ViewRegisteredPrimary.fxml");
+    }
+    @FXML
+    public void onViewRegisteredSecondary(){
+        getPane("/morogoro_lims/view/registration/ViewRegisteredSecondary.fxml");
     }
     
     //Left pane
@@ -119,22 +134,6 @@ public class RegDash implements Initializable{
         }else{
             leftPaneCheckBox.setSelected(true);
         }
-    }
-    //Themes
-    @FXML
-    public void onDefault(){
-        redenCheckBox.setSelected(false);
-        darkenCheckBox.setSelected(false);
-    }    
-    @FXML
-    public void onReden(){
-        defaultCheckBox.setSelected(false);
-        darkenCheckBox.setSelected(false);
-    }
-    @FXML
-    public void onDarken(){
-        defaultCheckBox.setSelected(false);
-        darkenCheckBox.setSelected(false);
     }
     
     //Logout and Exit

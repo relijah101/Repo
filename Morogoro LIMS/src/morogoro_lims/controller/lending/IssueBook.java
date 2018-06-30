@@ -8,12 +8,18 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import morogoro_lims.controller.Misc;
 import morogoro_lims.model.Book;
 import morogoro_lims.model.Member;
@@ -22,11 +28,19 @@ import morogoro_lims.model.query.Query;
 
 public class IssueBook implements Initializable{
     @FXML private TextField searchMemberFld, searchBookFld, memberNameFld;
-    @FXML private ListView<Member> memberList;
-    @FXML private ListView<Book> bookList, issueList, unReturnedBooks;
+    @FXML private ListView<Book> issueList, unReturnedBooks;
+    
+    @FXML private TableView<Member> membersTable;
+    @FXML private TableColumn<Member, String>  memberRegCol, memberNameCol;
+    
+    @FXML private TableView<Book> bookTable;
+    @FXML private TableColumn<Book, String> bookNumberCol, bookTitleCol;
+    
     @FXML private Button addBookBtn, removeBookBtn;
     @FXML private ComboBox<String> returnDateFld;
     
+    private ObservableList<Book> bookList = FXCollections.observableArrayList();
+    private ObservableList<Member> memberList = FXCollections.observableArrayList();
     private final Query<Member> memberQuery = new Query();
     private final Query<Book> bookQuery = new Query();
     private final Query query = new Query();
@@ -40,15 +54,46 @@ public class IssueBook implements Initializable{
     private static ResultSet result;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initBookTable();
+        initBookTableCols();
+        
+        initMemberTable();
+        initMemberTableCols();
         addBookBtn.setDisable(true);
         removeBookBtn.setDisable(true);
-        memberList.setItems(memberQuery.select(Query.MEMBER_TABLE, 1));
-        bookList.setItems(bookQuery.select(Query.BOOK_TABLE, 0));
+        returnDateFld.setItems(Misc.getEndWeeks());
+    }
+    public void initBookTable(){
+        bookList.clear();
+        bookList = bookQuery.select(Query.BOOK_TABLE, 0);
+        if(bookList.isEmpty()){
+            bookTable.setPlaceholder(new Text("Hakuna rekodi ya kitabu."));
+        }else{
+            bookTable.setItems(bookList);
+        }
+    }
+    public void initBookTableCols(){
+        bookNumberCol.setCellValueFactory(new PropertyValueFactory<>("classNumber"));
+        bookTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+    }
+    
+    public void initMemberTable(){
+        memberList.clear();
+        memberList = memberQuery.select(Query.MEMBER_TABLE, 1);
+        if(memberList.isEmpty()){
+            membersTable.setPlaceholder(new Text("Hakuna mwanachama"));
+        }else{
+            membersTable.setItems(memberList);
+        }
+    }
+    public void initMemberTableCols(){
+        memberRegCol.setCellValueFactory(new PropertyValueFactory<>("regNumber"));
+        memberNameCol.setCellValueFactory(new PropertyValueFactory<>("fullName"));
     }
     
     public void reset(){
-        memberList.getSelectionModel().clearSelection();
-        bookList.getSelectionModel().clearSelection();
+        membersTable.getSelectionModel().clearSelection();
+        bookTable.getSelectionModel().clearSelection();
         issueList.getSelectionModel().clearSelection();
         issueList.getItems().clear();
         searchMemberFld.setText("");
@@ -56,23 +101,27 @@ public class IssueBook implements Initializable{
         memberNameFld.setText("");
         addBookBtn.setDisable(true);
         removeBookBtn.setDisable(true);
+        returnDateFld.getSelectionModel().select(0);
     }   
     
     @FXML
-    public void onMemberListClicked(){
-        if(memberList.getSelectionModel().getSelectedItem() != null){
-            memberId = memberList.getSelectionModel().getSelectedItem().getId();
-            memberReg = memberList.getSelectionModel().getSelectedItem().getRegNumber();
-            String fname = memberList.getSelectionModel().getSelectedItem().getFirstName();
-            String mname = memberList.getSelectionModel().getSelectedItem().getMiddleName();
-            String lname = memberList.getSelectionModel().getSelectedItem().getLastName();
+    public void onMembersTableClicked(){
+        if(membersTable.getSelectionModel().getSelectedItem() != null){
+            addBookBtn.setDisable(false);
+            removeBookBtn.setDisable(false);
+            memberId = membersTable.getSelectionModel().getSelectedItem().getId();
+            memberReg = membersTable.getSelectionModel().getSelectedItem().getRegNumber();
+            String fname = membersTable.getSelectionModel().getSelectedItem().getFirstName();
+            String mname = membersTable.getSelectionModel().getSelectedItem().getMiddleName();
+            String lname = membersTable.getSelectionModel().getSelectedItem().getLastName();
             memberNameFld.setText(fname + " " + mname + " " + lname);
-            System.out.println(memberReg);
             size = query.getSize(memberReg);
             ObservableList unReturnedBooksList = FXCollections.observableArrayList();
+            unReturnedBooksList.clear();
+            unReturnedBooks.getItems().clear();
             if(size != 0){
                 String sql = "SELECT * "
-                        + "FROM registered, lending, returning, book "
+                        + "FROM registered, lending, book "
                         + "WHERE registered.registration_number = ? "
                         + "AND registered.registration_number = lending.member_reg_number "
                         + "AND lending.id NOT IN (SELECT returning.lend_id FROM returning) "
@@ -83,27 +132,23 @@ public class IssueBook implements Initializable{
                     statement.setString(1, memberReg);
                     result = statement.executeQuery();
                     while(result.next()){
-                        String data = result.getString("class_number");
-                        data += "/ ";
-                        data += result.getString("title");
+                        Book data = new Book(result.getString("class_number"), result.getString("title"), 1L);
                         unReturnedBooksList.add(data);
                     }
                     unReturnedBooks.setItems(unReturnedBooksList);
                 }catch(SQLException sqle){
-                    Misc.display(sqle.getLocalizedMessage()+"juu", 2);
+                    Misc.display(sqle.getLocalizedMessage(), 2);
                 }finally{
                     try{result.close(); statement.close(); con.close();}catch(SQLException sqle){}
                 }
-            }else{
-                
             }
         }
     }        
     @FXML
     public void onBookListClicked(){
-        if(bookList.getSelectionModel().getSelectedItem() != null){
-            if(memberList.getSelectionModel().getSelectedItem() != null){
-                bookId = bookList.getSelectionModel().getSelectedItem().getId();
+        if(bookTable.getSelectionModel().getSelectedItem() != null){
+            if(membersTable.getSelectionModel().getSelectedItem() != null){
+                bookId = bookTable.getSelectionModel().getSelectedItem().getId();
                 addBookBtn.setDisable(false);
                 removeBookBtn.setDisable(false);
             }else{
@@ -114,8 +159,8 @@ public class IssueBook implements Initializable{
     
     @FXML
     public void onAddBook(){
-        if(bookList.getSelectionModel().getSelectedItem() != null){
-            if(issueList.getItems().contains(bookList.getSelectionModel().getSelectedItem())){
+        if(bookTable.getSelectionModel().getSelectedItem() != null){
+            if(issueList.getItems().contains(bookTable.getSelectionModel().getSelectedItem())){
                 Misc.display("Kitabu kimeshaongezwa kwenye listi.", 0);
                 return;                
             }
@@ -127,7 +172,7 @@ public class IssueBook implements Initializable{
                 Misc.display("Idadi ya vitabu imezidi 5.", 0);
                 return; 
             }
-            issueList.getItems().add(bookList.getSelectionModel().getSelectedItem());
+            issueList.getItems().add(bookTable.getSelectionModel().getSelectedItem());
         }
     }
     @FXML
@@ -144,13 +189,62 @@ public class IssueBook implements Initializable{
             Misc.display("Hakikisha umeweka vitabu kwenye listi!", 1);
             return;
         }
-        
+        if(returnDateFld.getSelectionModel().getSelectedItem() == null){
+            Misc.display("Weka muda wa kurudisha kitabu", 1);
+            returnDateFld.requestFocus();
+            return;
+        }
         ObservableList<Book> bookToIssue = issueList.getItems();
+        String issueDate = Misc.today();
         String returnDate = returnDateFld.getSelectionModel().getSelectedItem();
+        
+        Object[] object = {bookToIssue, memberReg, issueDate, returnDate};
+        if(query.insert(object, Query.LEND_TABLE)){
+            reset();
+            initBookTable();
+        }
     }
     @FXML
     public void onClear(){
         reset();
+    }
+    @FXML
+    public void onSearchingMember(){
+        FilteredList<Member> filteredList = new FilteredList<>(memberList, p->true);
+        searchMemberFld.textProperty().addListener((observableValue, oldValue, newValue)->{
+            filteredList.setPredicate(mem->{
+                if(newValue.isEmpty() || newValue == null) return true;
+                
+                String lowerCase = newValue.toLowerCase();
+                if(mem.getRegNumber().contains(lowerCase)) return true;
+                if(mem.getFirstName().contains(lowerCase)) return true;
+                if(mem.getMiddleName().contains(lowerCase)) return true;
+                if(mem.getLastName().contains(lowerCase)) return true;
+                
+                return false;
+            });
+        });
+        SortedList<Member> sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(membersTable.comparatorProperty());
+        membersTable.setItems(sortedList);
+    }
+    @FXML 
+    public void onSearchingBook(){
+        FilteredList<Book> filteredList = new FilteredList<>(bookList, p->true);
+        searchMemberFld.textProperty().addListener((observableValue, oldValue, newValue)->{
+            filteredList.setPredicate(bk->{
+                if(newValue.isEmpty() || newValue == null) return true;
+                
+                String lowerCase = newValue.toLowerCase();
+                if(bk.getClassNumber().contains(lowerCase)) return true;
+                if(bk.getTitle().contains(lowerCase)) return true;
+                
+                return false;
+            });
+        });
+        SortedList<Book> sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(bookTable.comparatorProperty());
+        bookTable.setItems(sortedList);
     }
 }
 

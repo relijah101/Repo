@@ -36,10 +36,24 @@ public class AddAuthor implements Initializable{
             firstNameFld.requestFocus();
             return;
         }
-        if(false == PatternMatch.text(fname) || false == PatternMatch.text(mname) || false == PatternMatch.text(lname)){
+        if(false == PatternMatch.text(fname)){
             Misc.display("Hakikisha muundo wa jina umefuatwa", 1);
             firstNameFld.requestFocus();
             return;
+        }
+        if(!mname.isEmpty()){
+            if(false == PatternMatch.text(mname)){                
+                Misc.display("Hakikisha muundo wa jina umefuatwa", 1);
+                middleNameFld.requestFocus();
+                return;
+            }
+        }
+        if(!lname.isEmpty()){
+            if(false == PatternMatch.text(lname)){
+            Misc.display("Hakikisha muundo wa jina umefuatwa", 1);
+            lastNameFld.requestFocus();
+            return;
+        }
         }
         
         Author author = new Author(fname, mname, lname);

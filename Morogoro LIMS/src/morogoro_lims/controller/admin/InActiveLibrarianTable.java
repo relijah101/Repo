@@ -4,12 +4,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -23,7 +26,8 @@ public class InActiveLibrarianTable implements Initializable{
     
     @FXML private TableView<Librarian> librarianTable;
     @FXML private TableColumn<Librarian, String> fNameCol, mNameCol, lNameCol, depCol, phone1Col, phone2Col, addrCol, streetCol;
-    
+    @FXML private TextField searchFld;
+    private ObservableList<Librarian> librarianList;
     Long libId;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -31,7 +35,7 @@ public class InActiveLibrarianTable implements Initializable{
         initCols();
     }
     public void initTable(){
-        ObservableList<Librarian> librarianList = query.select(Query.LIBRARIAN_TABLE, 0);
+        librarianList = query.select(Query.LIBRARIAN_TABLE, 0);
         if(!librarianList.isEmpty()){
             librarianTable.setItems(librarianList);      
         }else{   
@@ -48,6 +52,7 @@ public class InActiveLibrarianTable implements Initializable{
         phone2Col.setCellValueFactory(new PropertyValueFactory<>("phone2"));
         streetCol.setCellValueFactory(new PropertyValueFactory<>("street"));
     }
+
     @FXML
     public void onViewLibrarian(){
         if(libId != null){
@@ -84,5 +89,25 @@ public class InActiveLibrarianTable implements Initializable{
         if(librarianTable.getSelectionModel().getSelectedItem() != null){
             libId = librarianTable.getSelectionModel().getSelectedItem().getId();
         }
+    }
+    @FXML
+    public void onSearching(){
+        FilteredList<Librarian> filteredList = new FilteredList<>(librarianList, p->true);
+        searchFld.textProperty().addListener((observable, oldValue, newValue)->{
+            filteredList.setPredicate(lib->{
+                if(newValue == null || newValue.isEmpty()) return true;
+                if(lib.getReg().contains(newValue.toLowerCase())) return true;
+                if(lib.getFirstName().contains(newValue.toLowerCase())) return true;
+                if(lib.getMiddleName().contains(newValue.toLowerCase())) return true;
+                if(lib.getLastName().contains(newValue.toLowerCase())) return true;
+                if(lib.getDepartment().contains(newValue.toLowerCase())) return true;
+                if(lib.getStreet().contains(newValue.toLowerCase())) return true;
+                
+                return false;
+            });
+        });
+        SortedList<Librarian> sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(librarianTable.comparatorProperty());
+        librarianTable.setItems(sortedList);
     }
 }

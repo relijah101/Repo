@@ -5,16 +5,13 @@
  */
 package morogoro_lims.controller.lending;
 
-import morogoro_lims.controller.admin.*;
 import morogoro_lims.controller.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import morogoro_lims.model.User;
 import morogoro_lims.model.query.Query;
 
@@ -72,12 +69,18 @@ public class ChangePassword implements Initializable{
         
         //Compare old pwd 
         User user = LendDash.getUser();
-        Query q = new Query();
+        Query q = new Query();        
+        
+        cPwd = Misc.getSHA512Password(cPwd);
         if(!(cPwd.equals(q.getPwd(user.getRegNumber())))){
+            System.out.println(cPwd);
+            System.out.println(q.getPwd(user.getRegNumber()));
             Misc.display("Neno siri la sasa sio sahihi.", 1);
             currentPwdFld.requestFocus();
             return;
         }
+        
+        nPwd = Misc.getSHA512Password(nPwd);
         if(q.updatePwd(user.getRegNumber(), nPwd)){
             reset();
         }

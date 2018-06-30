@@ -45,11 +45,16 @@ public class Insert{
     }
     
     public static void main(String[] args){
-        Map<String, String> dataCols = new HashMap<>();
-        dataCols.put("member_id", "?");
-        dataCols.put("registration_number", "?");
-        dataCols.put("librarian_id", "?");
+        Map<String, String> bookColsData = new HashMap<>();
+                bookColsData.put("class_number", "?");
+                bookColsData.put("title", "?");
+                bookColsData.put("category_id", "?");
+                bookColsData.put("edition", "?");
+                bookColsData.put("publisher_id", "?");
+                bookColsData.put("isbn", "?");
+                bookColsData.put("copies", "?");
+                bookColsData.put("reference", "?");
         
-        System.out.println(sql("table", dataCols));
+        System.out.println(sql("table", bookColsData));
     }
 }

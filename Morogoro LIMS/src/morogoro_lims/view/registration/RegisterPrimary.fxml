@@ -39,7 +39,7 @@
                         <Image url="@../Image/search-icon.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="searchPrimary" onKeyReleased="#onSearchAdult" promptText="Tafuta mwanachama" styleClass="textfield" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="searchPrimary" onKeyTyped="#onSearchPrimary" promptText="Tafuta mwanachama" styleClass="textfield" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <TableView fx:id="registerPrimaryTable" onMouseClicked="#onAdultTableClicked" prefHeight="151.0" prefWidth="688.0" VBox.vgrow="ALWAYS">
